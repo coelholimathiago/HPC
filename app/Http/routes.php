@@ -40,6 +40,8 @@ Route::group(['prefix' => 'projetos'], function ()
 
     Route::post('abertos/adicionar','ProjetoController@adicionarPeca')->name('adicionarPeca');
 
+    Route::post('abertos/remover','ProjetoController@removerPeca')->name('removerPeca');
+
     Route::get('fechados','MainController@projetosFechados');
 });
 

@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use DB;
 use App\Models\MateriaPrima as MP;
 use App\Models\Maquinas as Maquinas;
 use App\Models\Pecas as Pecas;
+use App\Models\TemposPecas as TemposPecas;
 
 class PecaController extends Controller
 {
@@ -19,7 +21,9 @@ class PecaController extends Controller
     public function index()
     {
       $pecas = new Pecas;
-      $listaPecas = $pecas->all();
+      $listaPecas = $pecas
+                    ->join('materiaprima','pecas.idmateriaprima','=','materiaprima.id')
+                    ->select('pecas.*','materiaprima.material')->get();
       return view('pecas',compact('listaPecas'));
     }
 
@@ -49,18 +53,31 @@ class PecaController extends Controller
       $pecas->codigo = $request->codigo;
       $pecas->descricao = $request->descricao;
       $pecas->idmateriaprima = $request->materiaprima;
-      $pecas->idmaquina = $request->maquina;
-      $pecas->tempoestimado = $request->tempoestimado;
       try
       {
         $pecas->save();
-        return redirect()->route('peca.index');
       }
       catch (Exception $e)
       {
         dd($e);
       }
-
+      for ($i=0; $i < $request->qtdMaquinas ; $i++)
+      {
+        $temposPecas = new TemposPecas;
+        $temposPecas->codigo = $request->codigo;
+        $temposPecas->idmaquina = $request->maquina[$i];
+        $temposPecas->tempoestimado = $request->tempoestimado[$i];
+        try
+        {
+          $temposPecas->save();
+        }
+        catch (Exception $e)
+        {
+          dd($e);
+        }
+        unset($temposPecas);
+      }
+      return redirect()->route('peca.index');
     }
 
     /**
@@ -71,7 +88,19 @@ class PecaController extends Controller
      */
     public function show($id)
     {
-        //
+      $pecas = new Pecas;
+      $temposPecas = new TemposPecas;
+      $infoPeca = $pecas
+                  ->join('materiaprima','pecas.idmateriaprima','=','materiaprima.id')
+                  ->select('pecas.*','materiaprima.material')
+                  ->where('pecas.id',$id)
+                  ->first();
+      $tempos = $temposPecas
+                ->join('maquinas','tempospecas.idmaquina','=','maquinas.id')
+                ->where('tempospecas.codigo',$infoPeca->codigo)
+                ->select('tempospecas.*','maquinas.descricao','maquinas.custohora',DB::raw('time_to_sec(tempospecas.tempoestimado)*maquinas.custohora/3600 as custo'))
+                ->get();
+      return view('showPeca',compact('infoPeca','tempos'));
     }
 
     /**
@@ -82,7 +111,19 @@ class PecaController extends Controller
      */
     public function edit($id)
     {
-        //
+      $pecas = new Pecas;
+      $temposPecas = new TemposPecas;
+      $materiaPrima = new MP;
+      $maquinas = new Maquinas;
+      $infoPeca = $pecas->find($id);
+      $tempos = $temposPecas
+                ->join('maquinas','tempospecas.idmaquina','=','maquinas.id')
+                ->select('tempospecas.*','maquinas.descricao')
+                ->where('codigo',$infoPeca->codigo)->get();
+      $material = $materiaPrima->where('id',$infoPeca->idmateriaprima)->get()->first();
+      $listaMP = $materiaPrima->all();
+      $listaMaquinas = $maquinas->all();
+      return view('cadastros.peca',compact('infoPeca','tempos','material','listaMP','listaMaquinas'));
     }
 
     /**
@@ -92,9 +133,35 @@ class PecaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $codigo)
     {
-        //
+      $pecas = new Pecas;
+      $infoPeca = $pecas
+                  ->where('codigo',$codigo)
+                  ->update(['codigo' => $request->codigo,'descricao' => $request->descricao,'idmateriaprima' => $request->materiaprima]);
+      if($request->qtdMaquinas != "")
+      {
+        $temposPecas = new TemposPecas;
+        $temposPecas->where('codigo',$codigo)->delete();
+        unset($temposPecas);
+        for ($i=0; $i < $request->qtdMaquinas ; $i++)
+        {
+          $temposPecas = new TemposPecas;
+          $temposPecas->codigo = $request->codigo;
+          $temposPecas->idmaquina = $request->maquina[$i];
+          $temposPecas->tempoestimado = $request->tempoestimado[$i];
+          try
+          {
+            $temposPecas->save();
+          }
+          catch (Exception $e)
+          {
+            dd($e);
+          }
+          unset($temposPecas);
+        }
+      }
+      return redirect()->route('peca.index');
     }
 
     /**
@@ -105,6 +172,11 @@ class PecaController extends Controller
      */
     public function destroy($id)
     {
-        //
+      $pecas = new Pecas;
+      $temposPecas = new TemposPecas;
+      $infoPeca = $pecas->find($id);
+      $temposPecas->where('codigo',$infoPeca->codigo)->delete();
+      $pecas->destroy($id);
+      return redirect()->route('peca.index');
     }
 }

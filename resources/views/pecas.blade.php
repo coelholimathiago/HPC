@@ -9,19 +9,18 @@
       <th>CODIGO</th>
       <th>DESCRIÇÃO</th>
       <th>MATERIA-PRIMA</th>
-      <th>DESENHO</th>
-      <th>MAQUINA</th>
-      <th>TEMPO ESTIMADO</th>
+      <th>AÇÕES</th>
     </thead>
     <tbody>
       @foreach ($listaPecas as $peca)
         <tr>
           <td>{{$peca->codigo}}</td>
           <td>{{$peca->descricao}}</td>
-          <td>{{$peca->idmateriaprima}}</td>
-          <td>{{$peca->desenho}}</td>
-          <td>{{$peca->idmaquina}}</td>
-          <td>{{$peca->tempoestimado}}</td>
+          <td>{{$peca->material}}</td>
+          <td>
+            <a href="{{route('peca.edit',$peca->id)}}"><button type="button">Editar</button></a>
+            <a href="{{route('peca.show',$peca->id)}}"><button type="button">Detalhes</button></a>
+          </td>
         </tr>
       @endforeach
     </tbody>
