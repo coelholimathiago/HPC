@@ -22,7 +22,12 @@ class MainController extends Controller
     public function projetosAbertos()
     {
       $projetos = new Projetos;
-      $projetosAbertos = $projetos->join('clientes','projetos.idcliente','=','clientes.id')->select('projetos.*','clientes.cliente')->where('status', 'aberto')->get();
+      $projetosAbertos = $projetos
+                        ->join('clientes','projetos.idcliente','=','clientes.id')
+                        ->select('projetos.*','clientes.cliente')
+                        ->where('status', 'aberto')
+                        ->orderBy('projetos.dataprevista','asc')
+                        ->get();
       return view('projetos',compact('projetosAbertos'));
     }
 

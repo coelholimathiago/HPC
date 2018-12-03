@@ -1,0 +1,99 @@
+*
+{
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+}
+
+html
+{
+  height: 100%;
+}
+
+body
+{
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.painel
+{
+  background-color: black;
+  box-shadow: 1px 1px 5px grey;
+  position: relative;
+}
+
+.painel img
+{
+  float: right;
+  max-width: 25%;
+  height: auto;
+}
+
+.content
+{
+  flex: 1;
+}
+
+footer
+{
+  background-color: #555;
+  border-top: solid 1px grey;
+  color: white;
+  height: 100px;
+  margin-top: 2em;
+  position: relative;
+  font-family: 'Roboto', sans-serif;
+}
+
+
+footer .tecnologia
+{
+  font-weight: bold;
+  font-size: 1.5em;
+  position: absolute;
+  top: 40%;
+  left: 10%;
+  transform: translate(-50%,-50%);
+  transition: 0.5s;
+}
+
+.tecnologia a:visited
+{
+  color: white;
+}
+
+.tecnologia a:hover
+{
+  color: hotpink;
+}
+
+footer .copyright
+{
+  box-shadow: 1px 1px 5px black;
+  position: absolute;
+  bottom: 0;
+  opacity: 0.5;
+  padding: 0.25em;
+  text-align: center;
+  width: 100%;
+}
+
+footer .contato-sistema
+{
+  font-size: 2em;
+  position: absolute;
+  top: 40%;
+  right: 10%;
+  transform: translate(50%,-50%);
+}
+
+.contato-sistema a:visited
+{
+  color: white;
+}
+
+.contato-sistema a:hover
+{
+  color: hotpink;
+}

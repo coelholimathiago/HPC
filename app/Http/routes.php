@@ -34,13 +34,15 @@ Route::group(['prefix' => 'projetos'], function ()
 {
     Route::resource('novo','NovoProjetoController');
 
-    Route::get('abertos','MainController@projetosAbertos');
+    Route::get('abertos','MainController@projetosAbertos')->name('projetosAbertos');
 
     Route::get('abertos/{id}','ProjetoController@index')->name('detalhesProjeto');
 
     Route::post('abertos/adicionar','ProjetoController@adicionarPeca')->name('adicionarPeca');
 
     Route::post('abertos/remover','ProjetoController@removerPeca')->name('removerPeca');
+
+    Route::post('abertos/orcamento','ProjetoController@recalcularOrcamento')->name('recalcularOrcamento');
 
     Route::get('fechados','MainController@projetosFechados');
 });

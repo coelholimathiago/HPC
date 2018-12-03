@@ -23,7 +23,7 @@ class ProjetoController extends Controller
       $listaPecasProjeto = $pecasProjeto
                           ->join('pecas','pecasprojetos.idpeca','=','pecas.id')
                           ->join('materiaprima','pecasprojetos.idmateriaprima','=','materiaprima.id')
-                          ->select('pecasprojetos.*','pecas.codigo','materiaprima.material')
+                          ->select('pecasprojetos.*',DB::raw('time_to_sec(pecasprojetos.tempoestimado) as sectempoestimado'),'pecas.codigo','materiaprima.material')
                           ->where('idprojeto',$id)->get();
       return view('showProjeto',compact('infoProjeto','listaPecas','listaPecasProjeto'));
     }
@@ -64,5 +64,10 @@ class ProjetoController extends Controller
       $pecaProjeto = new PecasProjetos;
       $pecaProjeto->destroy($request->remover);
       return back();
+    }
+
+    public function recalcularOrcamento(Request $request)
+    {
+      dd($request->all());
     }
 }

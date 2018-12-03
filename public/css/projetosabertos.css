@@ -1,0 +1,107 @@
+.painel input
+{
+  border: none;
+  border-radius: 0.5em;
+  font-size: 1.5em;
+  position: absolute;
+  margin-left: 1em;
+  text-align: center;
+  top: 50%;
+  transform: translate(0%,-50%);
+  width: 20%;
+}
+
+.controle-janelas
+{
+  background-color: black;
+  color: white;
+  padding-top: 0.2em;
+  padding-bottom: 0.2em;
+}
+
+.controle-janelas a
+{
+  color: white;
+  margin-left: 1em;
+}
+
+.resumo-projeto
+{
+  border: solid 1px lightgrey;
+  border-radius: 0.5em;
+  height: 10em;
+  margin: 1em;
+  position: relative;
+}
+
+.resumo-imagem
+{
+  height: 10em;
+  float: left;
+  position: relative;
+  width: 15%;
+}
+
+.resumo-imagem img
+{
+  border-radius: 10px;
+  box-shadow: 2px 2px 5px lightgrey;
+  max-height: 90%;
+  max-width: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+}
+
+.resumo-descricao
+{
+  float: left;
+  position: relative;
+  width: 85%;
+}
+
+.resumo-descricao h2
+{
+  color: crimson;
+  font-weight: bold;
+}
+
+.resumo-descricao [name='cliente']
+{
+  font-family: 'Ranga', cursive;
+  font-size: 2em;
+}
+
+.resumo-descricao [name='dataPrevista']
+{
+  font-size: 3em;
+  position: absolute;
+  top: 50%;
+  right: 30%;
+  transform: translate(0%,-25%);
+}
+
+
+.resumo-projeto button
+{
+  background-color: crimson;
+  border: none;
+  border-radius: 50%;
+  box-shadow: 1px 1px 15px black;
+  color: white;
+  font-size: 2em;
+  font-weight: bold;
+  height: 2em;
+  position: absolute;
+  right: 2%;
+  top: 70%;
+  transform: translate(0%,-50%);
+  transition: 0.3s;
+  width: 2em;
+}
+
+.resumo-projeto button:hover
+{
+  background-color: #a30f2d;
+}

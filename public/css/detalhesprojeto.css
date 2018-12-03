@@ -1,0 +1,222 @@
+[class*='col-']
+{
+  float: left;
+  position: relative;
+}
+
+.col-3 { width: 25%;}
+.col-6 { width: 50%;}
+.col-9 { width: 75%;}
+
+
+.controle-janelas
+{
+  background-color: black;
+  color: white;
+  padding-top: 0.2em;
+  padding-bottom: 0.2em;
+}
+
+.controle-janelas a
+{
+  color: white;
+  margin-left: 1em;
+}
+
+.controle-projeto
+{
+  height: 10em;
+}
+
+.info
+{
+  height: 100%;
+}
+
+.info .titulo
+{
+  color: crimson;
+  font-size: 2.5em;
+  font-weight: bold;
+  margin-left: 1em;
+  position: absolute;
+  text-transform: uppercase;
+  top: 50%;
+  transform: translate(0%,-75%);
+}
+
+.info .titulo::after
+{
+  content: "ID : "attr(value)"";
+  display: block;
+  color: black;
+  font-size: 0.8em;
+  text-align: left;
+}
+
+.cadastro-existente
+{
+  height: 100%;
+}
+
+.cadastro-peca
+{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  width: 80%;
+}
+
+.cadastro-peca [name=peca]
+{
+  border: solid 1px lightgrey;
+  border-radius: 0.3em;
+  box-shadow: 1px 1px 5px lightgrey;
+  font-size: 1.5em;
+  text-align: center;
+  width: 70%;
+}
+
+.cadastro-peca button
+{
+  background-color: #555;
+  border: none;
+  border-radius: 0.25em;
+  box-shadow: 1px 1px 10px black;
+  color: white;
+  font-size: 1.5em;
+  transition: 0.3s;
+  width: 25%;
+}
+
+.cadastro-peca button:hover
+{
+  background-color: black;
+}
+
+.cadastro-peca h4
+{
+  display: inline;
+  font-family: 'Roboto', sans-serif;
+}
+
+.cadastro-novo
+{
+  height: 100%;
+}
+
+.cadastro-novo button
+{
+  background-color: crimson;
+  border: none;
+  border-radius: 0.25em;
+  box-shadow: 1px 1px 10px black;
+  color: white;
+  font-size: 1.5em;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  transition: 0.3s;
+  width: 75%;
+}
+
+.cadastro-novo button:hover
+{
+  background-color: #a30f2d;
+}
+
+#pecas-projeto
+{
+  margin: auto;
+  width: 95%;
+}
+
+#pecas-projeto thead
+{
+  border-bottom: solid 5px crimson;
+}
+
+#pecas-projeto th
+{
+  font-size: 1.2em;
+  padding: 2px;
+  text-align: center;
+}
+
+#pecas-projeto tbody
+{
+  box-shadow: 1px 1px 10px grey;
+}
+
+#pecas-projeto td
+{
+  border-bottom: solid 1px lightgrey;
+  padding: 5px;
+  text-align: center;
+}
+
+#pecas-projeto button
+{
+  color: white;
+  background-color: #555;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.5em;
+  width: 50%;
+}
+
+.estimativas
+{
+  margin: auto;
+  padding-top: 2em;
+  width: 95%;
+}
+
+.estimativas [name='titulo']
+{
+  border-bottom:  solid 5px crimson;
+  font-size: 1.2em;
+  font-weight: bold;
+  padding: 0.5em;
+  text-align: center;
+}
+
+.estimativas h4
+{
+  font-size: 1.8em;
+}
+
+.estimativas h4::before
+{
+  content: attr(value);
+  font-weight: bold;
+}
+
+.tempo-real
+{
+  color: red;
+}
+
+.orcamento
+{
+  margin: auto;
+  padding-top: 2em;
+  width: 95%;
+}
+
+.orcamento [name='titulo']
+{
+  border-bottom:  solid 5px crimson;
+  font-size: 1.2em;
+  font-weight: bold;
+  padding: 0.5em;
+  text-align: center;
+}
+
+#orcamento-projeto
+{
+  margin: auto;
+  width: 65%;
+}
