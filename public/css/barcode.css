@@ -1,0 +1,26 @@
+*
+{
+  box-sizing: border-box;
+}
+
+.info
+{
+  float: left;
+}
+
+.barcode
+{
+  float: left;
+  margin-left: 2em;
+}
+
+.rastreamento
+{
+  clear: left;
+}
+
+h4::before
+{
+  content: attr(value);
+  font-weight: bold;
+}

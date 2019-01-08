@@ -80,7 +80,11 @@ class ProjetoController extends Controller
       $tempoEstimado = $infoProjeto->sum('tempoestimadosec');
       return view('cadastros.orcamento',compact('custoEstimado','tempoEstimado','id'));
     }
-
+    /**
+    * Composição do código de barras
+    * ID PROJETO.CODIGO DA PEÇA.ID UNICO DA PEÇA.ID TEMPOS.ID MAQUINA.ID MATERIA PRIMA
+    *
+    */
     public function gerarBarcode($id)
     {
       $pecaProjeto = new PecasProjetos;
@@ -89,7 +93,7 @@ class ProjetoController extends Controller
               ->join('tempospecas','pecas.codigo','=','tempospecas.codigo')
               ->join('maquinas','tempospecas.idmaquina','=','maquinas.id')
               ->where('pecasprojetos.id',$id)
-              ->select('pecasprojetos.*','pecas.*','tempospecas.*','maquinas.*')
+              ->select('pecasprojetos.idprojeto','pecas.id','pecas.codigo','pecas.idmateriaprima','tempospecas.id as idtempo','tempospecas.descricao','tempospecas.tempoestimado','maquinas.id as idmaquina','maquinas.descricao as tipomaquina')
               ->get();
       return view('showBarcode',compact('info'));
     }

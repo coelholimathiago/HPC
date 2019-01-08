@@ -6,7 +6,7 @@
   <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="/bootstrap-3.3.7-dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/barcode.css">
   <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
   <script type="text/javascript" src="/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="/js/all.js"></script>
@@ -16,14 +16,19 @@
 </head>
   <body>
     @foreach ($info as $operacao)
-      <h4>Peça -> {{$operacao->codigo}}</h4>
-      <h4>Máquina -> {{$operacao->descricao}}</h4>
-      <h4>Tempos estimado -> {{$operacao->tempoestimado}}</h4>
-      <svg class="barcode"
-        jsbarcode-value="{{$operacao->idprojeto.$operacao->idpeca.$operacao->idmateriaprima.$operacao->idmaquina}}"
-        jsbarcode-textmargin="0"
-        jsbarcode-fontoptions="bold">
-    </svg>
+      <div class="rastreamento">
+        <div class="info">
+          <h4 value="Peça : ">{{$operacao->codigo}}</h4>
+          <h4 value="Máquina : ">{{$operacao->tipomaquina}}</h4>
+          <h4 value="Descrição : ">{{$operacao->descricao}}</h4>
+          <h4 value="Tempo estimado : ">{{$operacao->tempoestimado}}</h4>
+        </div>
+        <svg class="barcode"
+          jsbarcode-value="{{$operacao->idprojeto.".".$operacao->codigo.".".$operacao->id.".".$operacao->idtempo.".".$operacao->idmaquina.".".$operacao->idmateriaprima}}"
+          jsbarcode-textmargin="0"
+          jsbarcode-fontoptions="bold">
+        </svg>
+      </div>
     @endforeach
   </body>
 </html>
