@@ -13,22 +13,8 @@
 
 date_default_timezone_set("America/Sao_Paulo");
 
-Route::get('/','MainController@index')->middleware('auth');
-
-Route::auth();
-
-Route::get('/home', 'HomeController@index');
-
-Route::get('/model','ClientesController@index');
-
-Route::get('/admin','HomeController@admin')->middleware(['auth','admin']);
-
-Route::get('/envia','HomeController@envia');
-
-Route::post('/recebe','HomeController@recebe');
-
 //----------------------------------------------------------
-Route::get("/painel","MainController@index")->name('home');
+Route::get("/","MainController@index")->name('home');
 
 Route::group(['prefix' => 'projetos'], function ()
 {
