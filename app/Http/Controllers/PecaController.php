@@ -10,6 +10,7 @@ use App\Models\MateriaPrima as MP;
 use App\Models\Maquinas as Maquinas;
 use App\Models\Pecas as Pecas;
 use App\Models\TemposPecas as TemposPecas;
+use Picqer\Barcode\BarcodeGeneratorHTML as BC;
 
 class PecaController extends Controller
 {
@@ -66,6 +67,7 @@ class PecaController extends Controller
         $temposPecas = new TemposPecas;
         $temposPecas->codigo = $request->codigo;
         $temposPecas->idmaquina = $request->maquina[$i];
+        $temposPecas->descricao = $request->operacao[$i];
         $temposPecas->tempoestimado = $request->tempoestimado[$i];
         try
         {
@@ -179,4 +181,5 @@ class PecaController extends Controller
       $pecas->destroy($id);
       return redirect()->route('peca.index');
     }
+
 }

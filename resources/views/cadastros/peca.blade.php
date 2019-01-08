@@ -51,11 +51,9 @@
         @endforeach
       </select>
       <input type="time" value="">
+      <input type="text" value="">
     </div>
-    <div class="maquinas">
-
-    </div>
-
+    <div class="maquinas"></div>
     <button type="submit">Salvar</button>
   </form>
 @endsection

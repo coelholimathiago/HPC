@@ -9,6 +9,7 @@ use App\Models\Projetos as Projetos;
 use App\Models\Pecas as Pecas;
 use App\Models\PecasProjetos as PecasProjetos;
 use App\Models\TemposPecas as TemposPecas;
+use App\Models\Orcamentos as Orcamentos;
 use DB;
 
 class ProjetoController extends Controller
@@ -18,14 +19,16 @@ class ProjetoController extends Controller
       $projeto = new Projetos;
       $pecas = new Pecas;
       $pecasProjeto = new PecasProjetos;
+      $orcamento = new Orcamentos;
       $infoProjeto = $projeto->find($id);
       $listaPecas = $pecas->all();
+      $custos = $orcamento->where('idprojeto',$id)->first();
       $listaPecasProjeto = $pecasProjeto
                           ->join('pecas','pecasprojetos.idpeca','=','pecas.id')
                           ->join('materiaprima','pecasprojetos.idmateriaprima','=','materiaprima.id')
                           ->select('pecasprojetos.*',DB::raw('time_to_sec(pecasprojetos.tempoestimado) as sectempoestimado'),'pecas.codigo','materiaprima.material')
                           ->where('idprojeto',$id)->get();
-      return view('showProjeto',compact('infoProjeto','listaPecas','listaPecasProjeto'));
+      return view('showProjeto',compact('infoProjeto','listaPecas','listaPecasProjeto','custos'));
     }
 
     public function adicionarPeca(Request $request)
@@ -66,8 +69,28 @@ class ProjetoController extends Controller
       return back();
     }
 
-    public function recalcularOrcamento(Request $request)
+    public function calcularOrcamento($id)
     {
-      dd($request->all());
+      $pecaProjeto = new PecasProjetos;
+      $infoProjeto = $pecaProjeto
+                    ->select('pecasprojetos.*',DB::raw('time_to_sec(tempoestimado) as tempoestimadosec'))
+                    ->where('idprojeto',$id)
+                    ->get();
+      $custoEstimado = $infoProjeto->sum('custoestimado');
+      $tempoEstimado = $infoProjeto->sum('tempoestimadosec');
+      return view('cadastros.orcamento',compact('custoEstimado','tempoEstimado','id'));
+    }
+
+    public function gerarBarcode($id)
+    {
+      $pecaProjeto = new PecasProjetos;
+      $info = $pecaProjeto
+              ->join('pecas','pecasprojetos.idpeca','=','pecas.id')
+              ->join('tempospecas','pecas.codigo','=','tempospecas.codigo')
+              ->join('maquinas','tempospecas.idmaquina','=','maquinas.id')
+              ->where('pecasprojetos.id',$id)
+              ->select('pecasprojetos.*','pecas.*','tempospecas.*','maquinas.*')
+              ->get();
+      return view('showBarcode',compact('info'));
     }
 }

@@ -42,7 +42,9 @@ Route::group(['prefix' => 'projetos'], function ()
 
     Route::post('abertos/remover','ProjetoController@removerPeca')->name('removerPeca');
 
-    Route::post('abertos/orcamento','ProjetoController@recalcularOrcamento')->name('recalcularOrcamento');
+    Route::get('abertos/barcode/{id}','ProjetoController@gerarBarcode');
+
+    Route::resource('orcamento','OrcamentoController');
 
     Route::get('fechados','MainController@projetosFechados');
 });

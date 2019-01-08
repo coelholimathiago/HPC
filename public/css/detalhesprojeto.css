@@ -164,7 +164,7 @@
   border: none;
   border-radius: 5px;
   font-size: 1.5em;
-  width: 50%;
+  width: 100%;
 }
 
 .estimativas
@@ -219,4 +219,17 @@
 {
   margin: auto;
   width: 65%;
+}
+
+.acoes
+{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.acoes > div
+{
+  margin: 2px;
+  width: 40%;
 }

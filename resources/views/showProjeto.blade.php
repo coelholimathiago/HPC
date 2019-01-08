@@ -36,7 +36,7 @@
       </form>
     </div>
     <div class="col-3 cadastro-novo">
-      <a href="{{route('peca.index')}}"><button type="button" name="button">Cadastrar nova peça <i class="fas fa-plus"></i></button></a>
+      <a href="{{route('peca.index')}}"><button type="button" name="button">Lista de peças <i class="fas fa-plus"></i></button></a>
     </div>
   </div>
   <table id="pecas-projeto">
@@ -59,10 +59,17 @@
           <td>{{$pecasProjeto->custoestimado}}</td>
           <td></td>
           <td>
-            <form class="" action="{{route('removerPeca')}}" method="post">
-              {!! csrf_field() !!}
-              <button type="submit" name="remover" value="{{$pecasProjeto->id}}"><i class="fas fa-trash-alt"></i></button>
-            </form>
+            <div class="acoes">
+              <div>
+                <a href="barcode/{{$pecasProjeto->id}}"><button type="button" name="button"><i class="fas fa-barcode"></i></button></a>
+              </div>
+              <div>
+                <form class="" action="{{route('removerPeca')}}" method="post">
+                  {!! csrf_field() !!}
+                  <button type="submit" name="remover" value="{{$pecasProjeto->id}}"><i class="fas fa-trash-alt"></i></button>
+                </form>
+              </div>
+            </div>
           </td>
         </tr>
       @endforeach
@@ -70,31 +77,12 @@
   </table>
   <div class="orcamento">
     <h1 name="titulo">ORÇAMENTO</h1>
-    <table id="orcamento-projeto">
-      <thead>
-        <th>CUSTO TOTAL ESTIMADO</th>
-        <th>MARGEM DE LUCRO</th>
-        <th>PREÇO FINAL</th>
-        <th>AÇÕES</th>
-      </thead>
-      <form class="" action="{{route('recalcularOrcamento')}}" method="post">
-        {!! csrf_field() !!}
-        <tbody>
-          <td>{{$listaPecasProjeto->sum('custoestimado')}}</td>
-          <td>
-            <select class="" name="porcentagemLucro">
-              <option value="1.65">65%</option>
-              <option value="1.5">50%</option>
-              <option value="1.3">30%</option>
-            </select>
-          </td>
-          <td><input type="text" name="orcamento" value="{{$listaPecasProjeto->sum('custoestimado')*1.65}}"></td>
-          <td>
-              <button type="submit" name="idprojeto" value="{{$infoProjeto->id}}">Recalcular</button>
-          </td>
-        </tbody>
-      </form>
-    </table>
+    @if ($custos == null)
+      <h1>Sem orçamento cadastrado</h1>
+    @else
+      <h1>Orçamento ok!</h1>
+    @endif
+    <a href=""><button type="button" name="button">Editar</button></a>
   </div>
   <div class="estimativas">
     <h1 name="titulo">PROJEÇÕES</h1>
