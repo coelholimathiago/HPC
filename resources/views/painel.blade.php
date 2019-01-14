@@ -7,3 +7,5 @@
   <a href="{{url('/cadastro/cliente')}}"><button type="button" name="button">Clientes</button></a>
   <a href="{{url('/cadastro/funcionario')}}"><button type="button" name="button">Funcionários</button></a>
 </div>
+
+<a href="{{url('/rastreamento')}}"><button type="button" name="button">Rastreamento</button></a>

@@ -45,3 +45,9 @@ Route::group(['prefix' => 'cadastro'], function ()
 });
 
 Route::resource('peca','PecaController');
+
+Route::get('rastreamento','RastreamentoController@index');
+
+Route::post('rastreamento/busca','RastreamentoController@busca')->name('buscaRastreamento');
+
+Route::post('rastreamento/iniciar','RastreamentoController@iniciar')->name('iniciaRastreamento');
