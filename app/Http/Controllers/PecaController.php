@@ -66,6 +66,7 @@ class PecaController extends Controller
       {
         $temposPecas = new TemposPecas;
         $temposPecas->codigo = $request->codigo;
+        $temposPecas->idpeca = $pecas->id;
         $temposPecas->idmaquina = $request->maquina[$i];
         $temposPecas->descricao = $request->operacao[$i];
         $temposPecas->tempoestimado = $request->tempoestimado[$i];

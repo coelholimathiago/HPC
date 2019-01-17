@@ -55,9 +55,21 @@
           <td>{{$pecasProjeto->codigo}}</td>
           <td>{{$pecasProjeto->material}}</td>
           <td>{{$pecasProjeto->tempoestimado}}</td>
-          <td class="tempo-real">00:00:00</td>
+          <td class="tempo-real">
+            @if (count($tempoGasto->where('idpeca',$pecasProjeto->idpeca)) > 0)
+              {{$tempoGasto->where('idpeca',$pecasProjeto->idpeca)->first()->tempogasto}}
+            @else
+              00:00:00
+            @endif
+          </td>
           <td>{{$pecasProjeto->custoestimado}}</td>
-          <td></td>
+          <td>
+            @if (count($tempoGasto->where('idpeca',$pecasProjeto->idpeca)) > 0)
+              {{number_format(($tempoGasto->where('idpeca',$pecasProjeto->idpeca)->first()->sectempogasto/$pecasProjeto->sectempoestimado)*100,2)}} %
+            @else
+              0 %
+            @endif
+          </td>
           <td>
             <div class="acoes">
               <div>

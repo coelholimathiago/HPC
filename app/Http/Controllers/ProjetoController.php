@@ -10,6 +10,7 @@ use App\Models\Pecas as Pecas;
 use App\Models\PecasProjetos as PecasProjetos;
 use App\Models\TemposPecas as TemposPecas;
 use App\Models\Orcamentos as Orcamentos;
+use App\Models\Rastreamento as Rastreamento;
 use DB;
 
 class ProjetoController extends Controller
@@ -20,6 +21,7 @@ class ProjetoController extends Controller
       $pecas = new Pecas;
       $pecasProjeto = new PecasProjetos;
       $orcamento = new Orcamentos;
+      $log = new Rastreamento;
       $infoProjeto = $projeto->find($id);
       $listaPecas = $pecas->all();
       $custos = $orcamento->where('idprojeto',$id)->first();
@@ -28,7 +30,12 @@ class ProjetoController extends Controller
                           ->join('materiaprima','pecasprojetos.idmateriaprima','=','materiaprima.id')
                           ->select('pecasprojetos.*',DB::raw('time_to_sec(pecasprojetos.tempoestimado) as sectempoestimado'),'pecas.codigo','materiaprima.material')
                           ->where('idprojeto',$id)->get();
-      return view('showProjeto',compact('infoProjeto','listaPecas','listaPecasProjeto','custos'));
+      $tempoGasto = $log
+                    ->where('idprojeto',$id)
+                    ->groupBy('idpeca')
+                    ->select('idpeca','funcionario',DB::raw('sec_to_time(sum(time_to_sec(tempogasto))) as tempogasto'),DB::raw('sum(time_to_sec(tempogasto)) as sectempogasto'),'status')
+                    ->get();
+      return view('showProjeto',compact('infoProjeto','listaPecas','listaPecasProjeto','custos','tempoGasto'));
     }
 
     public function adicionarPeca(Request $request)
