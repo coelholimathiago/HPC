@@ -24,6 +24,7 @@
     <a href="{{url('/cadastro/maquina')}}"><button type="button" name="button">Máquinas <i class="fas fa-wrench"></i></button></a>
     <a href="{{url('/cadastro/cliente')}}"><button type="button" name="button">Clientes <i class="fas fa-address-book"></i></button></a>
     <a href="{{url('/cadastro/funcionario')}}"><button type="button" name="button">Funcionários <i class="fas fa-handshake"></i></button></a>
+    <a href="/peca"><button type="button" name="button">Peças</button></a>
     <a href="{{url('/rastreamento')}}"><button type="button" name="button">Rastreamento <i class="fas fa-barcode"></i></button></a>
   </div>
 

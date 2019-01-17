@@ -13,10 +13,10 @@
     <strong>> ORÇAMENTO</strong>
   </div>
   <form class="" action="" method="post">
-    <input type="text" name="custoEstimado" value="{{$custoEstimado}}">
-    <input type="text" name="tempoEstimado" value="{{gmdate('H:i:s',$tempoEstimado)}}">
+    <input type="text" name="custoEstimado" value="{{$custoBase}}">
+    <input type="text" name="tempoEstimado" value="{{gmdate('H:i:s',$tempoBase)}}">
     <input type="text" name="custoFixo" value="59.49">
-    <input type="text" name="custoIndireto" value="{{($tempoEstimado/3600)*59.49}}">
+    <input type="text" name="custoIndireto" value="{{($tempoBase/3600)*59.49}}">
     <div class="custos-adicionais">
       <input type="text" name="materiaPrima" placeholder="Custo matéria-prima">
       <input type="text" name="terceiros" placeholder="Custo terceiros">

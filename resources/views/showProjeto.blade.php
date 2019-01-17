@@ -42,6 +42,7 @@
   <table id="pecas-projeto">
     <thead>
       <th>PEÇA</th>
+      <th>QUANTIDADE</th>
       <th>MATÉRIA-PRIMA</th>
       <th>TEMPO ESTIMADO</th>
       <th>TEMPO REAL</th>
@@ -53,6 +54,7 @@
       @foreach ($listaPecasProjeto as $pecasProjeto)
         <tr>
           <td>{{$pecasProjeto->codigo}}</td>
+          <td></td>
           <td>{{$pecasProjeto->material}}</td>
           <td>{{$pecasProjeto->tempoestimado}}</td>
           <td class="tempo-real">
@@ -90,11 +92,11 @@
   <div class="orcamento">
     <h1 name="titulo">ORÇAMENTO</h1>
     @if ($custos == null)
-      <h1>Sem orçamento cadastrado</h1>
+      <p><i class="fas fa-dollar-sign"></i></p>
     @else
       <h1>Orçamento ok!</h1>
     @endif
-    <a href=""><button type="button" name="button">Editar</button></a>
+    <a href="{{route('orcamento',$infoProjeto->id)}}"><button type="button" name="button"><i class="fas fa-edit"></i></button></a>
   </div>
   <div class="estimativas">
     <h1 name="titulo">PROJEÇÕES</h1>

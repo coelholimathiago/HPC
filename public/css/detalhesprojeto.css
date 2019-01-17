@@ -203,6 +203,7 @@
 {
   margin: auto;
   padding-top: 2em;
+  position: relative;
   width: 95%;
 }
 
@@ -213,6 +214,41 @@
   font-weight: bold;
   padding: 0.5em;
   text-align: center;
+}
+
+.orcamento p
+{
+  font-size: 2.5em;
+  text-align: center;
+}
+
+.orcamento p::after
+{
+  content: "Orçamento não cadastrado!";
+  display: block;
+}
+
+.orcamento button
+{
+  background-color: #555;
+  border: none;
+  border-radius: 50%;
+  box-shadow: 1px 1px 15px black;
+  color: white;
+  font-size: 2em;
+  font-weight: bold;
+  height: 2em;
+  position: absolute;
+  right: 2%;
+  top: 80%;
+  transform: translate(0%,-50%);
+  transition: 0.3s;
+  width: 2em;
+}
+
+.orcamento button:hover
+{
+  background-color: black;
 }
 
 #orcamento-projeto

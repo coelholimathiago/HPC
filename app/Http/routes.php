@@ -30,7 +30,7 @@ Route::group(['prefix' => 'projetos'], function ()
 
     Route::get('abertos/barcode/{id}','ProjetoController@gerarBarcode');
 
-    Route::resource('orcamento','OrcamentoController');
+    Route::get('orcamento/{id}','OrcamentoController@index')->name('orcamento');
 
     Route::get('fechados','MainController@projetosFechados');
 });
