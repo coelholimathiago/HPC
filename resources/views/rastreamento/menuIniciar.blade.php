@@ -2,18 +2,16 @@
 
 @section('conteudo')
   <p>Nome do funcionário -->{{$buscaFuncionario->nome}}</p>
-  @if (count($busca) != 0)
-    @foreach ($busca as $registro)
-      <form class="" action="{{route('reiniciaRastreamento')}}" method="post">
-        {!! csrf_field() !!}
-        <input type="text" name="id" value="{{$registro->id}}">
-        <input type="text" name="projeto" value="{{$registro->projeto}}">
-        <input type="text" name="codigo" value="{{$registro->codigo}}">
-        <input type="text" name="horaInicial" value="{{$registro->horainicial}}">
-        <button type="submit" name="button">Reiniciar</button>
-      </form>
-    @endforeach
-  @endif
+  @foreach ($buscaFuncionario->registros->where('status','PAUSADO') as $registro)
+    <form class="" action="{{route('reiniciaRastreamento')}}" method="post">
+      {!! csrf_field() !!}
+      <input type="text" name="id" value="{{$registro->id}}">
+      <input type="text" name="projeto" value="{{$registro->pecaProjeto->projeto->nome}}">
+      <input type="text" name="codigo" value="{{$registro->pecaProjeto->peca->codigo}}">
+      <input type="text" name="horaInicial" value="{{$registro->updated_at}}">
+      <button type="submit" name="button">Reiniciar</button>
+    </form>
+  @endforeach
   <form class="" action="{{route('iniciaRastreamento')}}" method="post">
     {!! csrf_field() !!}
     <input type="hidden" name="funcionario" value="{{$buscaFuncionario->id}}">

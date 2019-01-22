@@ -48,7 +48,7 @@ Route::resource('peca','PecaController');
 
 Route::get('rastreamento','RastreamentoController@index');
 
-Route::post('rastreamento/busca','RastreamentoController@busca')->name('buscaRastreamento');
+Route::any('rastreamento/busca','RastreamentoController@busca')->name('buscaRastreamento');
 
 Route::post('rastreamento/iniciar','RastreamentoController@iniciar')->name('iniciaRastreamento');
 

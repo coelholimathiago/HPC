@@ -1,14 +1,33 @@
-@foreach ($busca as $registro)
-  @if ($registro->status == "EM ANDAMENTO")
-    <form class="" action="{{route('finalizaRastreamento')}}" method="post">
-      {{ csrf_field() }}
-      <input type="hidden" name="id" value="{{$registro->id}}">
-      <input name="funcionario" value="{{$registro->func}}"/>
-      <input name="projeto" value="{{$registro->projeto}}"/>
-      <input name="codigoPeca"/ value="{{$registro->codigo}}">
-      <input name="horaInicial" value="{{$registro->horainicial}}"/>
-      <button type="submit" name="button" value="finalizar">Finalizar</button>
-      <button type="submit" name="button" value="pausar">Pausar</button>
+@extends('layouts.main')
+
+@section('titulo')
+  Finaliza Rastreamento | HPC
+@endsection
+
+@section('conteudo')
+  @foreach ($buscaFuncionario->registros->where('status','EM ANDAMENTO') as $registro)
+    <form action="{{route('finalizaRastreamento')}}" method="post">
+      {!! csrf_field() !!}
+      <div class="form-group">
+        <input class="form-control" type="hidden" name="id" value="{{$registro->id}}">
+      </div>
+      <div class="form-group">
+        <input class="form-control" name="funcionario" value="{{$registro->funcionario}}"/>
+      </div>
+      <div class="form-group">
+        <input class="form-control" name="projeto" value="{{$registro->pecaProjeto->projeto->nome}}"/>
+      </div>
+      <div class="form-group">
+        <input class="form-control" name="codigoPeca" value="{{$registro->pecaProjeto->peca->codigo}}">
+      </div>
+      <div class="form-group">
+        <input class="form-control" name="horaInicial" value="{{$registro->updated_at}}"/>
+      </div>
+      <div class="form-group">
+        <input class="form-control" type="number" name="quantidade" value="" required>
+      </div>
+      <button type="submit" name="button" class="btn btn-success" value="finalizar">Finalizar</button>
+      <button type="submit" name="button" class="btn btn-warning" value="pausar">Pausar</button>
     </form>
-  @endif
-@endforeach
+  @endforeach
+@endsection

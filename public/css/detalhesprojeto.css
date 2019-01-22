@@ -4,11 +4,6 @@
   position: relative;
 }
 
-.col-3 { width: 25%;}
-.col-6 { width: 50%;}
-.col-9 { width: 75%;}
-
-
 .controle-janelas
 {
   background-color: black;
@@ -25,12 +20,17 @@
 
 .controle-projeto
 {
+  display: grid;
+  grid-template-columns: 25% 50% 25%;
   height: 10em;
+  position: relative;
 }
 
 .info
 {
   height: 100%;
+  position: relative;
+  width: 100%;
 }
 
 .info .titulo
@@ -57,25 +57,29 @@
 .cadastro-existente
 {
   height: 100%;
+  position: relative;
+  width: 100%;
 }
 
 .cadastro-peca
 {
   position: absolute;
-  left: 50%;
   top: 50%;
+  left: 50%;
   transform: translate(-50%,-50%);
-  width: 80%;
+  text-align: center;
+  width: 100%;
 }
 
-.cadastro-peca [name=peca]
+.cadastro-peca input
 {
   border: solid 1px lightgrey;
-  border-radius: 0.3em;
-  box-shadow: 1px 1px 5px lightgrey;
+  border-radius: 0.5em;
+  box-shadow: 1px 1px 5px grey;
   font-size: 1.5em;
+  padding: 0.2em;
+  margin: 0.25em;
   text-align: center;
-  width: 70%;
 }
 
 .cadastro-peca button
@@ -85,9 +89,7 @@
   border-radius: 0.25em;
   box-shadow: 1px 1px 10px black;
   color: white;
-  font-size: 1.5em;
   transition: 0.3s;
-  width: 25%;
 }
 
 .cadastro-peca button:hover
@@ -95,15 +97,11 @@
   background-color: black;
 }
 
-.cadastro-peca h4
-{
-  display: inline;
-  font-family: 'Roboto', sans-serif;
-}
-
 .cadastro-novo
 {
   height: 100%;
+  position: relative;
+  width: 100%;
 }
 
 .cadastro-novo button
@@ -268,4 +266,11 @@
 {
   margin: 2px;
   width: 40%;
+}
+
+.alert-danger
+{
+  margin: auto;
+  margin-bottom: 1em;
+  width: 95%;
 }

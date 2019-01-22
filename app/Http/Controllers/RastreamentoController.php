@@ -8,6 +8,8 @@ use App\Http\Requests;
 use App\Models\Rastreamento as Rastreamento;
 use App\Models\Funcionarios as Funcionarios;
 use DB;
+use Validator;
+use Illuminate\Support\MessageBag as Erros;
 
 class RastreamentoController extends Controller
 {
@@ -22,45 +24,27 @@ class RastreamentoController extends Controller
       $buscaFuncionario = $funcionarios->find($request->codigoFuncionario);
       if($buscaFuncionario != null)
       {
-        $log = new Rastreamento;
-        $funcionario = $request->codigoFuncionario;
-        $busca = $log
-                ->join('projetos','rastreamento.idprojeto','=','projetos.id')
-                ->join('pecas','rastreamento.idpeca','=','pecas.id')
-                ->join('funcionarios','rastreamento.funcionario','=','funcionarios.id')
-                ->where([
-                ['rastreamento.funcionario',$funcionario],
-                ['rastreamento.status','!=','FINALIZADO'],
-                ])->select('rastreamento.id','funcionarios.nome as func','projetos.nome as projeto','pecas.codigo','rastreamento.status','rastreamento.updated_at as horainicial')
-                ->get();
-        if(in_array("EM ANDAMENTO",array_column($busca->toArray(),'status')))
+        if(count($buscaFuncionario->registros->where('status','EM ANDAMENTO')) > 0)
         {
-          return view('rastreamento.menuFinalizar',compact('busca'));
+          return view('rastreamento.menuFinalizar',compact('buscaFuncionario'));
         }
         else
         {
-          return view('rastreamento.menuIniciar',compact('buscaFuncionario','busca'));
+          return view('rastreamento.menuIniciar',compact('buscaFuncionario'));
         }
       }
       else
       {
-        return redirect('rastreamento')->with('erro', 'funcionario');
+        return redirect('rastreamento');
       }
     }
 
     public function iniciar(Request $request)
     {
       $barcode = explode(".",$request->barcode);
-      $idprojeto = $barcode[0];
-      $codigoPeca = $barcode[1];
-      $idpeca = $barcode[2];
-      $idtempos = $barcode[3];
-      $idmaquina = $barcode[4];
-      $idMp = $barcode[5];
+      $idpecaprojeto = $barcode[0];
       $log = new Rastreamento;
-      $log->idprojeto = $idprojeto;
-      $log->idpeca = $idpeca;
-      $log->idtempos = $idtempos;
+      $log->idpecaprojeto = $idpecaprojeto;
       $log->funcionario = $request->funcionario;
       $log->status = "EM ANDAMENTO";
       $log->save();
@@ -73,6 +57,7 @@ class RastreamentoController extends Controller
       if($request->button == 'finalizar')
       {
         $registro = $log->find($request->id);
+        $registro->qtdproduzida = $request->quantidade;
         $registro->status = 'FINALIZADO';
         $registro->save();
         return redirect('rastreamento');
@@ -82,6 +67,7 @@ class RastreamentoController extends Controller
         if($request->button == 'pausar')
         {
           $registro = $log->find($request->id);
+          $registro->qtdproduzida = $request->quantidade;
           $registro->status = 'PAUSADO';
           $registro->save();
           return redirect('rastreamento');

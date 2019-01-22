@@ -22,7 +22,7 @@
 .cadastros
 {
   display: grid;
-  grid-template-columns: auto auto auto auto;
+  grid-template-columns: auto auto auto auto auto;
   margin: auto;
   padding: 50px;
   text-align: center;

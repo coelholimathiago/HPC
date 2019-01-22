@@ -11,6 +11,7 @@ use App\Models\PecasProjetos as PecasProjetos;
 use App\Models\TemposPecas as TemposPecas;
 use App\Models\Orcamentos as Orcamentos;
 use App\Models\Rastreamento as Rastreamento;
+use Illuminate\Support\MessageBag as Erros;
 use DB;
 
 class ProjetoController extends Controller
@@ -18,54 +19,51 @@ class ProjetoController extends Controller
     public function index($id)
     {
       $projeto = new Projetos;
+      $projeto = $projeto::find($id);
       $pecas = new Pecas;
-      $pecasProjeto = new PecasProjetos;
-      $orcamento = new Orcamentos;
-      $log = new Rastreamento;
-      $infoProjeto = $projeto->find($id);
       $listaPecas = $pecas->all();
+      $orcamento = new Orcamentos;
       $custos = $orcamento->where('idprojeto',$id)->first();
-      $listaPecasProjeto = $pecasProjeto
-                          ->join('pecas','pecasprojetos.idpeca','=','pecas.id')
-                          ->join('materiaprima','pecasprojetos.idmateriaprima','=','materiaprima.id')
-                          ->select('pecasprojetos.*',DB::raw('time_to_sec(pecasprojetos.tempoestimado) as sectempoestimado'),'pecas.codigo','materiaprima.material')
-                          ->where('idprojeto',$id)->get();
-      $tempoGasto = $log
-                    ->where('idprojeto',$id)
-                    ->groupBy('idpeca')
-                    ->select('idpeca','funcionario',DB::raw('sec_to_time(sum(time_to_sec(tempogasto))) as tempogasto'),DB::raw('sum(time_to_sec(tempogasto)) as sectempogasto'),'status')
-                    ->get();
-      return view('showProjeto',compact('infoProjeto','listaPecas','listaPecasProjeto','custos','tempoGasto'));
+      return view('showProjeto',compact('projeto','listaPecas','custos','tempoGasto'));
     }
 
     public function adicionarPeca(Request $request)
     {
       $pecas = new Pecas;
-      $infoPeca = $pecas
-                  ->join('materiaprima','pecas.idmateriaprima','=','materiaprima.id')
-                  ->select('pecas.*','materiaprima.material')
-                  ->where('codigo',$request->peca)
-                  ->first();
-      $tempos = new TemposPecas;
-      $listaTempos = $tempos
-                    ->join('maquinas','tempospecas.idmaquina','=','maquinas.id')
-                    ->where('codigo',$infoPeca->codigo)
-                    ->select('tempospecas.codigo',DB::raw('sum(time_to_sec(tempospecas.tempoestimado)*maquinas.custohora/3600) as custototal,sec_to_time(sum(time_to_sec(tempospecas.tempoestimado))) as tempototal'))
-                    ->first();
+      $infoPeca = $pecas->where('codigo',$request->peca)->first();
+      $tempoEstimado = $infoPeca->tempos()->select(DB::raw('sum(time_to_sec(tempoestimado)) as tempoestimadopeca'))->first();
+      $custoEstimado = $infoPeca->tempos()->sum('custoestimado');
       $pecaProjeto = new PecasProjetos;
-      $pecaProjeto->idprojeto = $request->projeto;
-      $pecaProjeto->idpeca = $infoPeca->id;
-      $pecaProjeto->idmateriaprima = $infoPeca->idmateriaprima;
-      $pecaProjeto->tempoestimado = $listaTempos->tempototal;
-      $pecaProjeto->custoestimado = $listaTempos->custototal;
-      try
+      $verifProj = $pecaProjeto->where([
+                  ['idprojeto','=',$request->projeto],
+                  ['idpeca','=',$infoPeca->id],
+                  ])->count();
+      if($verifProj == 0)
       {
-        $pecaProjeto->save();
-        return back();
+        $pecaProjeto->idprojeto = $request->projeto;
+        $pecaProjeto->idpeca = $infoPeca->id;
+        $pecaProjeto->idmateriaprima = $infoPeca->idmateriaprima;
+        $pecaProjeto->quantidade = $request->quantidade;
+        $pecaProjeto->tempoestimado = gmdate("H:i:s",$tempoEstimado->tempoestimadopeca * $request->quantidade);
+        $pecaProjeto->custoestimado = $custoEstimado * $request->quantidade;
+        try
+        {
+          $pecaProjeto->save();
+          return back();
+        }
+        catch (Exception $e)
+        {
+          dd($e);
+        }
       }
-      catch (Exception $e)
+      else
       {
-        dd($e);
+        $errors = new Erros;
+
+        // add your error messages:
+        $errors->add('peca_repetida', 'Esta peça já foi adicionada, exclua e altere a quantidade!');
+
+        return back()->withErrors($errors);
       }
     }
 
@@ -89,19 +87,13 @@ class ProjetoController extends Controller
     }
     /**
     * Composição do código de barras
-    * ID PROJETO.CODIGO DA PEÇA.ID UNICO DA PEÇA.ID TEMPOS.ID MAQUINA.ID MATERIA PRIMA
+    * ID OPERACAO.ID PROJETO.CODIGO DA PEÇA.ID UNICO DA PEÇA.ID TEMPOS.ID MAQUINA.ID MATERIA PRIMA
     *
     */
     public function gerarBarcode($id)
     {
-      $pecaProjeto = new PecasProjetos;
-      $info = $pecaProjeto
-              ->join('pecas','pecasprojetos.idpeca','=','pecas.id')
-              ->join('tempospecas','pecas.codigo','=','tempospecas.codigo')
-              ->join('maquinas','tempospecas.idmaquina','=','maquinas.id')
-              ->where('pecasprojetos.id',$id)
-              ->select('pecasprojetos.idprojeto','pecas.id','pecas.codigo','pecas.idmateriaprima','tempospecas.id as idtempo','tempospecas.descricao','tempospecas.tempoestimado','maquinas.id as idmaquina','maquinas.descricao as tipomaquina')
-              ->get();
-      return view('showBarcode',compact('info'));
+      $pecasProjeto = new PecasProjetos;
+      $pecasProjeto = $pecasProjeto::find($id);
+      return view('showBarcode',compact('pecasProjeto'));
     }
 }

@@ -15,16 +15,16 @@
   <script src="/js/JsBarcode.all.min.js" charset="utf-8"></script>
 </head>
   <body>
-    @foreach ($info as $operacao)
+    @foreach ($pecasProjeto->peca->tempos as $operacao)
       <div class="rastreamento">
         <div class="info">
           <h4 value="Peça : ">{{$operacao->codigo}}</h4>
-          <h4 value="Máquina : ">{{$operacao->tipomaquina}}</h4>
+          <h4 value="Máquina : ">{{$operacao->maquina->descricao}}</h4>
           <h4 value="Descrição : ">{{$operacao->descricao}}</h4>
           <h4 value="Tempo estimado : ">{{$operacao->tempoestimado}}</h4>
         </div>
         <svg class="barcode"
-          jsbarcode-value="{{$operacao->idprojeto.".".$operacao->codigo.".".$operacao->id.".".$operacao->idtempo.".".$operacao->idmaquina.".".$operacao->idmateriaprima}}"
+          jsbarcode-value="{{$pecasProjeto->id.".".$pecasProjeto->idprojeto.".".$operacao->codigo.".".$operacao->idpeca.".".$operacao->id.".".$operacao->idmaquina.".".$pecasProjeto->idmateriaprima}}"
           jsbarcode-textmargin="0"
           jsbarcode-fontoptions="bold">
         </svg>

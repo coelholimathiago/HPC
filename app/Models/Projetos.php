@@ -17,4 +17,9 @@ class Projetos extends Model
     {
       return $this->hasOne('App\Models\Orcamentos','idprojeto');
     }
+
+    public function rastreamento()
+    {
+      return $this->hasMany('App\Models\Rastreamento','idprojeto');
+    }
 }

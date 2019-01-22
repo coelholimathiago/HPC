@@ -16,10 +16,10 @@
     <strong>> DETALHES PROJETO</strong>
   </div>
   <div class="controle-projeto">
-    <div class="col-3 info">
-      <h3 class="titulo" value="{{$infoProjeto->id}}">{{$infoProjeto->nome}}</h3>
+    <div class="info">
+      <h3 class="titulo" value="{{$projeto->id}}">{{$projeto->nome}}</h3>
     </div>
-    <div class="col-6 cadastro-existente">
+    <div class="cadastro-existente">
       <datalist id="pecas">
         @foreach ($listaPecas as $peca)
           <option value="{{$peca->codigo}}"></option>
@@ -27,18 +27,74 @@
       </datalist>
       <form class="cadastro-peca" action="{{route('adicionarPeca')}}" method="post">
         {!! csrf_field() !!}
-        <input type="hidden" name="projeto" value="{{$infoProjeto->id}}">
-        <input type="text" list="pecas" name="peca">
+        <input type="hidden" name="projeto" value="{{$projeto->id}}">
+        <input type="text" list="pecas" name="peca" placeholder="Código peça..." required>
+        <input type="number" name="quantidade" min="1" max="1000" placeholder="Qtd..." required>
         <button type="submit" name="button">
-          <h4>Adicionar</h4>
-          <i class="fas fa-box-open"></i>
+          <h4>Adicionar <i class="fas fa-box-open"></i></h4>
         </button>
       </form>
     </div>
-    <div class="col-3 cadastro-novo">
+    <div class="cadastro-novo">
       <a href="{{route('peca.index')}}"><button type="button" name="button">Lista de peças <i class="fas fa-plus"></i></button></a>
     </div>
   </div>
+  @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+  @endif
+
+  <table id="pecas-projeto">
+    <thead>
+      <th>PEÇA</th>
+      <th>QUANTIDADE</th>
+      <th>MATÉRIA-PRIMA</th>
+      <th>TEMPO ESTIMADO</th>
+      <th>TEMPO REAL</th>
+      <th>CUSTO ESTIMADO (R$)</th>
+      <th>STATUS</th>
+      <th>AÇÕES</th>
+    </thead>
+    <tbody>
+      @foreach ($projeto->pecas as $peca)
+        <tr>
+          <td>{{$peca->peca->codigo}}</td>
+          <td>{{$peca->quantidade}}</td>
+          <td>{{$peca->materiaPrima->material}}</td>
+          <td>{{$peca->tempoestimado}}</td>
+          <td>
+            @if (count($peca->rastreamento) > 0)
+              {{$peca->rastreamento()->select(DB::raw('sec_to_time(sum(time_to_sec(tempogasto))) as tempogasto'))->first()->tempogasto}}
+            @else
+              00:00:00
+            @endif
+          </td>
+          <td>{{$peca->custoestimado}}</td>
+          <td>0 %</td>
+          <td>
+            <div class="acoes">
+              <div>
+                <a href="barcode/{{$peca->id}}"><button type="button" name="button"><i class="fas fa-barcode"></i></button></a>
+              </div>
+              <div>
+                <form class="" action="{{route('removerPeca')}}" method="post">
+                  {!! csrf_field() !!}
+                  <button type="submit" name="remover" value="{{$peca->id}}"><i class="fas fa-trash-alt"></i></button>
+                </form>
+              </div>
+            </div>
+          </td>
+        </tr>
+      @endforeach
+    </tbody>
+  </table>
+
+{{--
   <table id="pecas-projeto">
     <thead>
       <th>PEÇA</th>
@@ -96,11 +152,11 @@
     @else
       <h1>Orçamento ok!</h1>
     @endif
-    <a href="{{route('orcamento',$infoProjeto->id)}}"><button type="button" name="button"><i class="fas fa-edit"></i></button></a>
+    <a href="{{route('orcamento',$projeto->id)}}"><button type="button" name="button"><i class="fas fa-edit"></i></button></a>
   </div>
   <div class="estimativas">
     <h1 name="titulo">PROJEÇÕES</h1>
     <h4 value="TEMPO TOTAL ESTIMADO: ">{{gmdate('H:i:s',$listaPecasProjeto->sum('sectempoestimado'))}}</h4>
     <h4 value="CUSTO TOTAL ESTIMADO: ">{{$listaPecasProjeto->sum('custoestimado')}}</h4>
-  </div>
+  </div> --}}
 @endsection
