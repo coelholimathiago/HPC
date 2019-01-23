@@ -67,7 +67,7 @@
           <td>{{$peca->quantidade}}</td>
           <td>{{$peca->materiaPrima->material}}</td>
           <td>{{$peca->tempoestimado}}</td>
-          <td>
+          <td class="tempo-real">
             @if (count($peca->rastreamento) > 0)
               {{$peca->rastreamento()->select(DB::raw('sec_to_time(sum(time_to_sec(tempogasto))) as tempogasto'))->first()->tempogasto}}
             @else
@@ -75,7 +75,13 @@
             @endif
           </td>
           <td>{{$peca->custoestimado}}</td>
-          <td>0 %</td>
+          <td>
+            @if (count($peca->rastreamento()->where('status','FINALIZADO')->get()) > 0)
+              <i class="fas fa-check"></i>
+            @else
+              <i class="fas fa-spinner"></i>
+            @endif
+          </td>
           <td>
             <div class="acoes">
               <div>
