@@ -136,35 +136,45 @@ class PecaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $codigo)
+    public function update(Request $request, $id)
     {
       $pecas = new Pecas;
-      $infoPeca = $pecas
-                  ->where('codigo',$codigo)
-                  ->update(['codigo' => $request->codigo,'descricao' => $request->descricao,'idmateriaprima' => $request->materiaprima]);
-      if($request->qtdMaquinas != "")
+      $infoPeca = $pecas::find($id);
+      $infoPeca->codigo = $request->codigo;
+      $infoPeca->descricao = $request->descricao;
+      $infoPeca->idmateriaprima = $request->materiaprima;
+      if($infoPeca->save())
       {
-        $temposPecas = new TemposPecas;
-        $temposPecas->where('codigo',$codigo)->delete();
-        unset($temposPecas);
-        for ($i=0; $i < $request->qtdMaquinas ; $i++)
+        if($request->qtdMaquinas != "")
         {
-          $temposPecas = new TemposPecas;
-          $temposPecas->codigo = $request->codigo;
-          $temposPecas->idmaquina = $request->maquina[$i];
-          $temposPecas->tempoestimado = $request->tempoestimado[$i];
-          try
+          if(count($infoPeca->tempos) > 0)
           {
-            $temposPecas->save();
+            $infoPeca->tempos()->delete();
           }
-          catch (Exception $e)
+          for ($i=0; $i < $request->qtdMaquinas ; $i++)
           {
-            dd($e);
+            $temposPecas = new TemposPecas;
+            $temposPecas->codigo = $request->codigo;
+            $temposPecas->idpeca = $id;
+            $temposPecas->idmaquina = $request->maquina[$i];
+            $temposPecas->descricao = $request->operacao[$i];
+            $temposPecas->tempoestimado = $request->tempoestimado[$i];
+            try
+            {
+              $temposPecas->save();
+              return redirect()->route('peca.index');
+            }
+            catch (Exception $e)
+            {
+              dd($e);
+            }
           }
-          unset($temposPecas);
         }
       }
-      return redirect()->route('peca.index');
+      else
+      {
+        return "Erro ao atualizar a peça!";
+      }
     }
 
     /**

@@ -9,7 +9,7 @@
   @if (!isset($infoPeca))
     <form class="form-group" action="{{route('peca.store')}}" method="post">
   @else
-    <form class="form-group" action="{{route('peca.update',$infoPeca->codigo)}}" method="post">
+    <form class="form-group" action="{{route('peca.update',$infoPeca->id)}}" method="post">
     {!! method_field('PUT') !!}
   @endif
     {!! csrf_field() !!}
