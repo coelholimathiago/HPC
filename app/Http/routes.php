@@ -32,6 +32,8 @@ Route::group(['prefix' => 'projetos'], function ()
 
     Route::get('orcamento/{id}','OrcamentoController@index')->name('orcamento');
 
+    Route::post('orcamento/salvar','OrcamentoController@salvar')->name('salvarOrcamento');
+
     Route::get('fechados','MainController@projetosFechados');
 });
 

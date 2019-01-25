@@ -30,6 +30,20 @@ body
   height: auto;
 }
 
+.controle-janelas
+{
+  background-color: black;
+  color: white;
+  padding-top: 0.2em;
+  padding-bottom: 0.2em;
+}
+
+.controle-janelas a
+{
+  color: white;
+  margin-left: 1em;
+}
+
 .content
 {
   flex: 1;

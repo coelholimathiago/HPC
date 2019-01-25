@@ -125,37 +125,37 @@
   background-color: #a30f2d;
 }
 
-#pecas-projeto
+.tabelas-projeto
 {
   margin: auto;
-  width: 95%;
+  width: 100%;
 }
 
-#pecas-projeto thead
+.tabelas-projeto thead
 {
   border-bottom: solid 5px crimson;
 }
 
-#pecas-projeto th
+.tabelas-projeto th
 {
   font-size: 1.2em;
   padding: 2px;
   text-align: center;
 }
 
-#pecas-projeto tbody
+.tabelas-projeto tbody
 {
   box-shadow: 1px 1px 10px grey;
 }
 
-#pecas-projeto td
+.tabelas-projeto td
 {
   border-bottom: solid 1px lightgrey;
   padding: 5px;
   text-align: center;
 }
 
-#pecas-projeto button
+.tabelas-projeto button
 {
   color: white;
   background-color: #555;
@@ -197,15 +197,15 @@
   color: red;
 }
 
-.orcamento
+
+.grupo
 {
   margin: auto;
-  padding-top: 2em;
   position: relative;
   width: 95%;
 }
 
-.orcamento [name='titulo']
+.grupo [name='titulo']
 {
   border-bottom:  solid 5px crimson;
   font-size: 1.2em;
@@ -214,19 +214,24 @@
   text-align: center;
 }
 
-.orcamento p
+.grupo p
 {
   font-size: 2.5em;
   text-align: center;
 }
 
-.orcamento p::after
+.grupo p::after
 {
-  content: "Orçamento não cadastrado!";
+  content: attr(msg);
   display: block;
 }
 
-.orcamento button
+.orcamento table
+{
+  margin-top: 2.5em;
+}
+
+button[name='editar-orcamento']
 {
   background-color: #555;
   border: none;
@@ -244,15 +249,9 @@
   width: 2em;
 }
 
-.orcamento button:hover
+button[name='editar-orcamento']:hover
 {
   background-color: black;
-}
-
-#orcamento-projeto
-{
-  margin: auto;
-  width: 65%;
 }
 
 .acoes
@@ -273,4 +272,19 @@
   margin: auto;
   margin-bottom: 1em;
   width: 95%;
+}
+
+.orcamento-cadastrado
+{
+  display: grid;
+  grid-template-columns: auto auto;
+  margin: auto;
+  width: 50%;
+}
+
+.orcamento-item
+{
+  font-size: 2em;
+  font-weight: bold;
+  text-align: center;
 }
