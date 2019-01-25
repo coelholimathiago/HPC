@@ -1,0 +1,65 @@
+.maquina
+{
+  border: solid 1px lightgrey;
+  border-radius: 0.5em;
+  box-shadow: 1px 1px 10px lightgrey;
+  display: grid;
+  grid-template-columns: auto auto auto auto auto auto auto;
+  margin: auto;
+  margin-bottom: 1em;
+  padding: 1em;
+  width: 80%;
+}
+
+.maquina select
+{
+  grid-column-start: 2;
+  grid-column-end: 8;
+}
+
+.maquina input
+{
+  grid-column-start: 2;
+  grid-column-end: 8;
+}
+
+.maquina input[type="time"]
+{
+  margin: auto;
+  margin-bottom: 1em;
+  width: 80%;
+}
+
+.maquina h4
+{
+  text-align: right;
+}
+
+.tempos-anteriores
+{
+  margin: auto;
+  width: 80%;
+}
+
+.tempos-anteriores h4
+{
+  border-bottom: solid 2px black;
+  font-size: 1.2em;
+  font-weight: bold;
+  padding: 0.5em;
+  text-align: center;
+}
+
+.tempos-anteriores table
+{
+  border-bottom: solid 1px lightgrey;
+  box-shadow: 1px 1px 10px lightgrey;
+  font-size: 1.2em;
+  margin-bottom: 1em;
+  width: 100%;
+}
+
+.tempos-anteriores td
+{
+  text-align: center;
+}

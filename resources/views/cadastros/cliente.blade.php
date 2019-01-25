@@ -1,6 +1,10 @@
-@extends('layouts.main')
+@extends('layouts.forms')
 
-@section('conteudo')
+@section('nome')
+  NOVO CLIENTE
+@endsection
+
+@section('dados')
   @if (isset($errors) && count($errors) > 0)
     <div class="alert alert-danger">
       @foreach ($errors->all() as $error)
@@ -15,10 +19,14 @@
     {!! method_field('PUT') !!}
   @endif
     {!! csrf_field() !!}
-    <input type="text" class="form-control" name="cliente" placeholder="Nome" value="{{$infoCliente->cliente or old('cliente')}}">
-    <input type="text" class="form-control" name="endereco" placeholder="Endereço" value="{{$infoCliente->endereco or old('endereco')}}">
-    <input type="text" class="form-control" name="telefone" placeholder="telefone" value="{{$infoCliente->telefone or old('telefone')}}">
-    <input type="text" class="form-control" name="email" placeholder="Email" value="{{$infoCliente->email or old('email')}}">
-    <button type="submit" name="salvar">Cadastrar</button>
+    <div class="titulo">Nome do cliente:</div>
+    <input type="text" class="form-control" name="cliente" value="{{$infoCliente->cliente or old('cliente')}}" required>
+    <div class="titulo">Endereço:</div>
+    <input type="text" class="form-control" name="endereco" value="{{$infoCliente->endereco or old('endereco')}}" required>
+    <div class="titulo">Telefone:</div>
+    <input type="text" class="form-control" name="telefone" value="{{$infoCliente->telefone or old('telefone')}}" required>
+    <div class="titulo">Email:</div>
+    <input type="email" class="form-control" name="email" value="{{$infoCliente->email or old('email')}}" required>
+    <button type="submit" name="salvar">SALVAR <i class="fas fa-save"></i></button>
   </form>
 @endsection

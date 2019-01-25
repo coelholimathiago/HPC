@@ -121,7 +121,7 @@ class PecaController extends Controller
       $infoPeca = $pecas->find($id);
       $tempos = $temposPecas
                 ->join('maquinas','tempospecas.idmaquina','=','maquinas.id')
-                ->select('tempospecas.*','maquinas.descricao')
+                ->select('tempospecas.*','maquinas.descricao as maquina')
                 ->where('codigo',$infoPeca->codigo)->get();
       $material = $materiaPrima->where('id',$infoPeca->idmateriaprima)->get()->first();
       $listaMP = $materiaPrima->all();

@@ -30,19 +30,19 @@
       <tbody>
         <tr>
           <td>HORA/MÁQUINA</td>
-          <td><input type="text" name="custoEstimado" value="{{$custoBase}}" required></td>
+          <td><input type="text" name="custoEstimado" value="{{$custoBase}}" readonly></td>
         </tr>
         <tr>
           <td>TEMPO ESTIMADO</td>
-          <td><input type="text" name="tempoEstimado" value="{{gmdate('H:i:s',$tempoBase)}}" required></td>
+          <td><input type="text" name="tempoEstimado" value="{{gmdate('H:i:s',$tempoBase)}}" readonly></td>
         </tr>
         <tr>
           <td>HORA/CUSTO INDIRETO</td>
-          <td><input type="text" name="custoFixo" value="59.49" required></td>
+          <td><input type="text" name="custoFixo" value="59.49" readonly></td>
         </tr>
         <tr>
           <td>CUSTO INDIRETO TOTAL</td>
-          <td><input type="text" name="custoIndireto" value="{{($tempoBase/3600)*59.49}}" required></td>
+          <td><input type="text" name="custoIndireto" value="{{($tempoBase/3600)*59.49}}" readonly></td>
         </tr>
         <tr>
           <td>MATÉRIA-PRIMA</td>
