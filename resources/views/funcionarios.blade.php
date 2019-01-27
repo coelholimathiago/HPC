@@ -1,9 +1,24 @@
-@extends('layouts.main')
+@extends('layouts.tabelas')
 
-@section('conteudo')
-  <h1>FUNCIONÁRIOS</h1>
-  <a href="/cadastro/funcionario/create"><button type="button" name="button">Novo Funcionário</button></a>
-  <table class="table table-striped table-bordered">
+@section('janelas')
+  <a href="{{route('home')}}"><i class="fas fa-home"></i></a>
+  <strong>> LISTA DE FUNCIONÁRIOS</strong>
+@endsection
+
+@section('titulo-elementos')
+  <h4>LISTA DE FUNCIONÁRIOS</h4>
+@endsection
+
+@section('pesquisa-elementos')
+  <input type="text" name="" value="" placeholder="Pesquisar...">
+@endsection
+
+@section('novo-elemento')
+  <a href="/cadastro/funcionario/create"><button type="button" name="button">Novo Funcionário <i class="fas fa-plus"></i></button></a>
+@endsection
+
+@section('lista')
+  <table>
     <thead>
       <th>NOME</th>
       <th>CARGO</th>
@@ -14,12 +29,12 @@
       @foreach ($funcionarios as $funcionario)
         @if ($funcionario->ativo == 1)
           <tr>
-            <td>{{$funcionario->nome}}</td>
-            <td>{{$funcionario->cargo}}</td>
-            <td>{{$funcionario->custohora}}</td>
-            <td>
-              <a href="{{route('cadastro.funcionario.edit',$funcionario->id)}}"><button type="button" name="button">Editar</button></a>
-              <a href="{{route('cadastro.funcionario.show',$funcionario->id)}}"><button type="button" name="button">Excluir</button></a>
+            <td align="center">{{$funcionario->nome}}</td>
+            <td align="center">{{$funcionario->cargo}}</td>
+            <td align="center">{{$funcionario->custohora}}</td>
+            <td align="center">
+              <a href="{{route('cadastro.funcionario.edit',$funcionario->id)}}"><button type="button" name="button"><i class="fas fa-edit"></i></button></a>
+              <a href="{{route('cadastro.funcionario.show',$funcionario->id)}}"><button type="button" name="button"><i class="fas fa-eye"></i></button></a>
             </td>
           </tr>
         @endif

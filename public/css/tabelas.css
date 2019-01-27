@@ -1,0 +1,91 @@
+.cabecalho-elementos
+{
+  display: grid;
+  grid-template-columns: 30% 40% 30%;
+  margin: auto;
+  padding: 2em;
+  width: 95%;
+}
+
+.cabecalho-elementos h4
+{
+  font-size: 2.5em;
+  font-weight: bold;
+  width: 80%;
+}
+
+.cabecalho-elementos input
+{
+  border: solid 1px lightgrey;
+  border-radius: 0.3em;
+  box-shadow: 1px 1px 10px grey;
+  font-size: 1.5em;
+  margin: auto;
+  text-align: center;
+  width: 80%;
+}
+
+.cabecalho-elementos a
+{
+  position: relative;
+  text-align: center;
+  width: 100%;
+}
+
+.cabecalho-elementos button
+{
+  background-color: crimson;
+  border: none;
+  border-radius: 0.3em;
+  color: white;
+  font-size: 1.4em;
+  font-weight: bold;
+  padding: 0.2em;
+  margin: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  width: 70%;
+}
+
+.lista-elementos button
+{
+  background-color: #555;
+  border: none;
+  border-radius: 0.3em;
+  color: white;
+  padding: 0.2em;
+  width: 30%;
+}
+
+.lista-elementos table
+{
+  margin: auto;
+  width: 95%;
+}
+
+.lista-elementos thead
+{
+  border-bottom: solid 5px crimson;
+}
+
+.lista-elementos tbody
+{
+  border: solid 1px lightgrey;
+  box-shadow: 1px 1px 15px grey;
+}
+
+.lista-elementos th
+{
+  font-size: 1.2em;
+  padding: 0.3em;
+  text-align: center;
+}
+
+.lista-elementos td
+{
+  border-bottom: solid 1px lightgrey;
+  font-size: 1em;
+  padding: 0.5em;
+}

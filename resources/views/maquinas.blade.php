@@ -1,9 +1,24 @@
-@extends('layouts.main')
+@extends('layouts.tabelas')
 
-@section('conteudo')
-  <h1>MÁQUINAS</h1>
-  <a href="{{route('cadastro.maquina.create')}}"><button type="button" name="button">Nova máquina</button></a>
-  <table class="table table-bordered table-striped">
+@section('janelas')
+  <a href="{{route('home')}}"><i class="fas fa-home"></i></a>
+  <strong>> LISTA DE MÁQUINAS</strong>
+@endsection
+
+@section('titulo-elementos')
+    <h4>LISTA DE MÁQUINAS</h4>
+@endsection
+
+@section('pesquisa-elementos')
+  <input type="text" name="" value="" placeholder="Pesquisar...">
+@endsection
+
+@section('novo-elemento')
+  <a href="{{route('cadastro.maquina.create')}}"><button type="button" name="button">Nova máquina <i class="fas fa-plus"></i></button></a>
+@endsection
+
+@section('lista')
+  <table>
     <thead>
       <th>DESCRIÇÃO</th>
       <th>MODELO</th>
@@ -16,15 +31,15 @@
     <tbody>
       @foreach ($listaMaquinas as $maquinas)
         <tr>
-          <td>{{$maquinas->descricao}}</td>
-          <td>{{$maquinas->modelo}}</td>
-          <td>{{$maquinas->fabricante}}</td>
-          <td>{{$maquinas->ano}}</td>
-          <td>{{$maquinas->preco}}</td>
-          <td>{{$maquinas->custohora}}</td>
-          <td>
-            <a href="{{route('cadastro.maquina.edit',$maquinas->id)}}"><button type="button" name="button">Editar</button></a>
-            <a href="{{route('cadastro.maquina.show',$maquinas->id)}}"><button type="button" name="button">Excluir</button></a>
+          <td align="center">{{$maquinas->descricao}}</td>
+          <td align="center">{{$maquinas->modelo}}</td>
+          <td align="center">{{$maquinas->fabricante}}</td>
+          <td align="center">{{$maquinas->ano}}</td>
+          <td align="center">{{$maquinas->preco}}</td>
+          <td align="center">{{$maquinas->custohora}}</td>
+          <td align="center">
+            <a href="{{route('cadastro.maquina.edit',$maquinas->id)}}"><button type="button" name="button"><i class="fas fa-edit"></i></button></a>
+            <a href="{{route('cadastro.maquina.show',$maquinas->id)}}"><button type="button" name="button"><i class="fas fa-eye"></i></button></a>
           </td>
         </tr>
       @endforeach
