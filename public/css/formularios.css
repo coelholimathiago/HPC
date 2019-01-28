@@ -35,6 +35,16 @@
   width: 80%;
 }
 
+.dados-formulario input[type="number"]
+{
+  font-size: 1.2em;
+  margin: auto;
+  margin-bottom: 1.5em;
+  padding: 0.5em;
+  text-align: center;
+  width: 80%;
+}
+
 .dados-formulario input[type="date"]
 {
   font-size: 1.2em;
@@ -150,4 +160,11 @@
   -webkit-transform: rotate(45deg);
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
+}
+
+.opcoes-finalizar
+{
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-column-gap: 1em;
 }

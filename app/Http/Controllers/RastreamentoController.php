@@ -15,7 +15,12 @@ class RastreamentoController extends Controller
 {
     public function index()
     {
-      return view('rastreamento.main');
+      $funcionarios = new Funcionarios;
+      $funcionarios = $funcionarios
+                      ->where('ativo',1)
+                      ->orderBy('nome','asc')
+                      ->get();
+      return view('rastreamento.main',compact('funcionarios'));
     }
 
     public function busca(Request $request)

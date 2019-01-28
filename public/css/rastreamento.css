@@ -1,0 +1,144 @@
+.busca-rastreamento
+{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+}
+
+.busca-rastreamento select
+{
+  background-color: white;
+  border: solid 1px lightgrey;
+  border-radius: 0.3em;
+  box-shadow: 1px 1px 10px black;
+  font-size: 2em;
+  padding: 0.5em;
+  margin-bottom: 1em;
+  width: 100%;
+}
+
+.busca-rastreamento button
+{
+  background-color: crimson;
+  border: none;
+  border-radius: 0.3em;
+  box-shadow: 1px 1px 10px black;
+  color: white;
+  font-size: 1.2em;
+  font-weight: bold;
+  padding: 0.5em;
+  transition: 0.3s;
+  width: 100%;
+}
+
+.busca-rastreamento button:hover
+{
+  background-color: #a30f2d;
+}
+
+.menu-iniciar
+{
+  display: grid;
+  grid-template-columns: auto auto;
+}
+
+.cabecalho
+{
+  border-bottom: 5px solid crimson;
+  font-size: 2em;
+  font-weight: bold;
+  grid-column: 1 / 3;
+  margin: 0.5em;
+  padding: 0.3em;
+  text-align: center;
+}
+
+.cabecalho::before
+{
+  content: "Funcionário:";
+  color: crimson;
+}
+
+.menu-item
+{
+  margin: 0.5em;
+  padding: 0.3em;
+  height: 350px;
+  position: relative;
+}
+
+.menu-item::before
+{
+  content: attr(titulo);
+  font-size: 1em;
+  font-weight: bold;
+}
+
+.novo
+{
+  border-right: 5px solid black;
+}
+
+.novo form
+{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+}
+
+.novo input
+{
+  border: solid 1px lightgrey;
+  border-radius: 0.3em;
+  box-shadow: 1px 1px 10px grey;
+  font-size: 1.5em;
+  margin-bottom: 1em;
+  padding: 0.3em;
+  text-align: center;
+  width: 100%;
+}
+
+.novo button
+{
+  background-color: crimson;
+  border: none;
+  border-radius: 0.3em;
+  box-shadow: 1px 1px 10px black;
+  color: white;
+  font-size: 1.2em;
+  font-weight: bold;
+  padding: 0.3em;
+  width: 100%;
+}
+
+.pause form
+{
+  margin: auto;
+  padding: 0.3em;
+  width: 90%;
+}
+
+.pause input
+{
+  border: solid 1px lightgrey;
+  border-radius: 0.3em;
+  box-shadow: 1px 1px 10px grey;
+  margin-bottom: 0.5em;
+  margin-top: 0.5em;
+  padding: 0.3em;
+  text-align: center;
+}
+
+.pause button
+{
+  background-color: crimson;
+  border: none;
+  border-radius: 0.3em;
+  box-shadow: 1px 1px 10px black;
+  color: white;
+  font-size: 1.2em;
+  font-weight: bold;
+  padding: 0.3em;
+}
