@@ -12,4 +12,9 @@ class Rastreamento extends Model
     {
       return $this->belongsTo('App\Models\PecasProjetos','idpecaprojeto','id');
     }
+
+    public function tempos()
+    {
+      return $this->belongsTo('App\Models\TemposPecas','idtempospecas','id');
+    }
 }

@@ -15,6 +15,8 @@
       <input type="text" class="form-control" name="projeto" value="{{$registro->pecaProjeto->projeto->nome}}"/>
       <div class="titulo">Código da peça:</div>
       <input type="text" class="form-control" name="codigoPeca" value="{{$registro->pecaProjeto->peca->codigo}}">
+      <div class="titulo">Operação:</div>
+      <input type="text" class="form-control" name="operacao" value="{{$registro->tempos->descricao}}">
       <div class="titulo">Data/hora de início:</div>
       <input type="text" class="form-control" name="horaInicial" value="{{$registro->updated_at}}"/>
       <div class="titulo">Quantidade produzida:</div>

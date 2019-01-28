@@ -20,13 +20,18 @@
     </div>
     <div titulo="PROCESSOS PAUSADOS" class="menu-item pause">
       @foreach ($buscaFuncionario->registros->where('status','PAUSADO') as $registro)
-        <form class="" action="{{route('reiniciaRastreamento')}}" method="post">
+        <form class="processos-pausados" action="{{route('reiniciaRastreamento')}}" method="post">
           {!! csrf_field() !!}
-          <input type="hidden" name="id" value="{{$registro->id}}">
-          <input type="text" name="projeto" value="{{$registro->pecaProjeto->projeto->nome}}">
-          <input type="text" name="codigo" value="{{$registro->pecaProjeto->peca->codigo}}">
-          <input type="text" name="horaInicial" value="{{$registro->updated_at}}">
-          <button type="submit" name="button">Reiniciar <i class="fas fa-sync-alt"></i></button>
+          <div class="resumo">
+            <input type="hidden" name="id" value="{{$registro->id}}">
+            <h5 titulo="Projeto: ">{{$registro->pecaProjeto->projeto->nome}}</h5>
+            <h5 titulo="Peça: ">{{$registro->pecaProjeto->peca->codigo}}</h5>
+            <h5 titulo="Operação: ">{{$registro->tempos->descricao}}</h5>
+            <h5 titulo="Hora inicial: ">{{$registro->updated_at}}</h5>
+          </div>
+          <div class="controle-pausados">
+            <button type="submit" name="button">Reiniciar <i class="fas fa-sync-alt"></i></button>
+          </div>
         </form>
       @endforeach
     </div>

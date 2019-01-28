@@ -131,7 +131,25 @@
   text-align: center;
 }
 
-.pause button
+.processos-pausados
+{
+  display: grid;
+  grid-template-columns: auto auto;
+}
+
+.processos-pausados h5::before
+{
+  content: attr(titulo);
+  color: crimson;
+  font-weight: bold;
+}
+
+.controle-pausados
+{
+  position: relative;
+}
+
+.processos-pausados button
 {
   background-color: crimson;
   border: none;
@@ -141,4 +159,10 @@
   font-size: 1.2em;
   font-weight: bold;
   padding: 0.3em;
+  height: 40%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  width: 100%;
 }

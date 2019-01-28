@@ -48,8 +48,10 @@ class RastreamentoController extends Controller
     {
       $barcode = explode(".",$request->barcode);
       $idpecaprojeto = $barcode[0];
+      $idtempospecas = $barcode[4];
       $log = new Rastreamento;
       $log->idpecaprojeto = $idpecaprojeto;
+      $log->idtempospecas = $idtempospecas;
       $log->funcionario = $request->funcionario;
       $log->status = "EM ANDAMENTO";
       $log->save();
