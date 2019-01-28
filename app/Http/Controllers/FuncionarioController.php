@@ -94,7 +94,7 @@ class FuncionarioController extends Controller
       $dadosFuncionario->ativo = ($request->ativo == 'on') ? 1 : 0;
       $dadosFuncionario->custohora = $request->custohora;
       $dadosFuncionario->save();
-      return "Atualizando dados do funcionário!";
+      return redirect()->route('cadastro.funcionario.index');
     }
 
     /**
