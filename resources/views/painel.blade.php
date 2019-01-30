@@ -15,6 +15,7 @@
   <div class="projetos">
     <a href="{{url('/projetos/abertos')}}"><button type="button" name="button">Abertos <i class="fas fa-box-open"></i></button></a>
     <a href="{{url('/projetos/fechados')}}"><button type="button" name="button">Finalizados <i class="fas fa-boxes"></i></button></a>
+    <a href="{{url('/projetos/aguardando')}}"><button type="button" name="button">Aguardando <i class="fas fa-boxes"></i></button></a>  
     <a href="{{url('/projetos/novo')}}"><button type="button" name="button">Novo <i class="fas fa-file"></i></button></a>
   </div>
   <div class="cabecalho">

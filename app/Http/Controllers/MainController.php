@@ -22,17 +22,39 @@ class MainController extends Controller
     public function projetosAbertos()
     {
       $projetos = new Projetos;
-      $projetosAbertos = $projetos
+      $titulo = "PROJETOS ABERTOS";
+      $resumoProjetos = $projetos
                         ->join('clientes','projetos.idcliente','=','clientes.id')
                         ->select('projetos.*','clientes.cliente')
                         ->where('status', 'aberto')
                         ->orderBy('projetos.dataprevista','asc')
                         ->get();
-      return view('projetos',compact('projetosAbertos'));
+      return view('projetos',compact('resumoProjetos','titulo'));
     }
 
     public function projetosFechados()
     {
-      return "Mostrar projetos fechados";
+      $projetos = new Projetos;
+      $titulo = "PROJETOS FECHADOS";
+      $resumoProjetos = $projetos
+                        ->join('clientes','projetos.idcliente','=','clientes.id')
+                        ->select('projetos.*','clientes.cliente')
+                        ->where('status', 'fechado')
+                        ->orderBy('projetos.dataprevista','asc')
+                        ->get();
+      return view('projetos',compact('resumoProjetos','titulo'));
+    }
+
+    public function projetosAguardando()
+    {
+      $projetos = new Projetos;
+      $titulo = "PROJETOS AGUARDANDO";
+      $resumoProjetos = $projetos
+                        ->join('clientes','projetos.idcliente','=','clientes.id')
+                        ->select('projetos.*','clientes.cliente')
+                        ->where('status', 'aguardando aprovação')
+                        ->orderBy('projetos.dataprevista','asc')
+                        ->get();
+      return view('projetos',compact('resumoProjetos','titulo'));
     }
 }

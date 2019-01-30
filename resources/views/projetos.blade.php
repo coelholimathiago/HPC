@@ -16,19 +16,25 @@
 @section('conteudo')
   <div class="controle-janelas">
     <a href="{{route('home')}}"><i class="fas fa-home"></i></a>
-    <strong> > PROJETOS ABERTOS</strong>
+    <strong> > {{$titulo}}</strong>
   </div>
-  @foreach ($projetosAbertos as $projeto)
-    <div class="resumo-projeto">
-      <div class="resumo-imagem">
-        <img src="/img/sem_foto.png">
+  @if (count($resumoProjetos) > 0)
+    @foreach ($resumoProjetos as $projeto)
+      <div class="resumo-projeto">
+        <div class="resumo-imagem">
+          <img src="/img/sem_foto.png">
+        </div>
+        <div class="resumo-descricao">
+          <h2 name="projeto">{{$projeto->nome}}</h2>
+          <h4 name="cliente">{{$projeto->cliente}}</h4>
+          <h4 name="dataPrevista"><i class="far fa-calendar-alt"></i> {{date_format(date_create($projeto->dataprevista),'d/m/Y')}}</h4>
+        </div>
+        <a href="{{route('detalhesProjeto',$projeto->id)}}"><button type="button" name="button">+</button></a>
       </div>
-      <div class="resumo-descricao">
-        <h2 name="projeto">{{$projeto->nome}}</h2>
-        <h4 name="cliente">{{$projeto->cliente}}</h4>
-        <h4 name="dataPrevista"><i class="far fa-calendar-alt"></i> {{date_format(date_create($projeto->dataprevista),'d/m/Y')}}</h4>
-      </div>
-      <a href="{{route('detalhesProjeto',$projeto->id)}}"><button type="button" name="button">+</button></a>
+    @endforeach
+  @else
+    <div class="projetos-vazio">
+      <h4><i class="fas fa-exclamation-triangle"></i> Sem projetos finalizados!</h4>
     </div>
-  @endforeach
+  @endif
 @endsection

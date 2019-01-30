@@ -105,3 +105,16 @@
 {
   background-color: #a30f2d;
 }
+
+.projetos-vazio
+{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+}
+
+.projetos-vazio h4
+{
+  font-size: 3em;
+}
