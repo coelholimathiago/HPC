@@ -127,6 +127,10 @@ footer
   font-family: 'Roboto', sans-serif;
 }
 
+footer a
+{
+  color: white;
+}
 
 footer .tecnologia
 {
@@ -146,7 +150,7 @@ footer .tecnologia
 
 .tecnologia a:hover
 {
-  color: hotpink;
+  color: crimson;
 }
 
 footer .copyright
@@ -176,7 +180,7 @@ footer .contato-sistema
 
 .contato-sistema a:hover
 {
-  color: hotpink;
+  color: crimson;
 }
 
 .construcao
