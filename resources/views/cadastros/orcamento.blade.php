@@ -9,13 +9,6 @@
 @endpush
 
 @section('conteudo')
-  <div class="controle-janelas">
-    <a href="{{route('home')}}"><i class="fas fa-home"></i></a>
-    <strong>></strong>
-    <a href="{{route('projetosAbertos')}}"><strong>PROJETOS ABERTOS</strong></a>
-    <a href="{{route('detalhesProjeto',$id)}}"><strong>> DETALHES PROJETO</strong></a>
-    <strong>> ORÇAMENTO</strong>
-  </div>
   <form action="{{route('salvarOrcamento')}}" method="post">
     {!! csrf_field() !!}
     <div class="titulo">
