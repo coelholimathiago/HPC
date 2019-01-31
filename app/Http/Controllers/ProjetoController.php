@@ -96,4 +96,20 @@ class ProjetoController extends Controller
       $pecasProjeto = $pecasProjeto::find($id);
       return view('showBarcode',compact('pecasProjeto'));
     }
+
+    public function finalizar($id)
+    {
+      $projeto = Projetos::find($id);
+      $projeto->status = "fechado";
+      $projeto->save();
+      return redirect()->route('home');
+    }
+
+    public function reiniciar($id)
+    {
+      $projeto = Projetos::find($id);
+      $projeto->status = "aberto";
+      $projeto->save();
+      return redirect()->route('home');
+    }
 }

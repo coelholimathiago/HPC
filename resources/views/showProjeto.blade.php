@@ -133,69 +133,11 @@
     @endif
   </div>
 
-{{--
-  <table id="pecas-projeto">
-    <thead>
-      <th>PEÇA</th>
-      <th>QUANTIDADE</th>
-      <th>MATÉRIA-PRIMA</th>
-      <th>TEMPO ESTIMADO</th>
-      <th>TEMPO REAL</th>
-      <th>CUSTO ESTIMADO (R$)</th>
-      <th>STATUS</th>
-      <th>AÇÕES</th>
-    </thead>
-    <tbody>
-      @foreach ($listaPecasProjeto as $pecasProjeto)
-        <tr>
-          <td>{{$pecasProjeto->codigo}}</td>
-          <td></td>
-          <td>{{$pecasProjeto->material}}</td>
-          <td>{{$pecasProjeto->tempoestimado}}</td>
-          <td class="tempo-real">
-            @if (count($tempoGasto->where('idpeca',$pecasProjeto->idpeca)) > 0)
-              {{$tempoGasto->where('idpeca',$pecasProjeto->idpeca)->first()->tempogasto}}
-            @else
-              00:00:00
-            @endif
-          </td>
-          <td>{{$pecasProjeto->custoestimado}}</td>
-          <td>
-            @if (count($tempoGasto->where('idpeca',$pecasProjeto->idpeca)) > 0)
-              {{number_format(($tempoGasto->where('idpeca',$pecasProjeto->idpeca)->first()->sectempogasto/$pecasProjeto->sectempoestimado)*100,2)}} %
-            @else
-              0 %
-            @endif
-          </td>
-          <td>
-            <div class="acoes">
-              <div>
-                <a href="barcode/{{$pecasProjeto->id}}"><button type="button" name="button"><i class="fas fa-barcode"></i></button></a>
-              </div>
-              <div>
-                <form class="" action="{{route('removerPeca')}}" method="post">
-                  {!! csrf_field() !!}
-                  <button type="submit" name="remover" value="{{$pecasProjeto->id}}"><i class="fas fa-trash-alt"></i></button>
-                </form>
-              </div>
-            </div>
-          </td>
-        </tr>
-      @endforeach
-    </tbody>
-  </table>
-  <div class="orcamento">
-    <h1 name="titulo">ORÇAMENTO</h1>
-    @if ($custos == null)
-      <p><i class="fas fa-dollar-sign"></i></p>
+  <div class="finalizar-projeto">
+    @if ($projeto->status == "aberto")
+      <a href="{{route('finalizarProjeto',$projeto->id)}}"><button type="button" name="button">Finalizar projeto <i class="fas fa-download"></i></button></a>
     @else
-      <h1>Orçamento ok!</h1>
+      <a href="{{route('reiniciarProjeto',$projeto->id)}}"><button type="button" name="button">Reabrir projeto <i class="fas fa-upload"></i></button></a>
     @endif
-    <a href="{{route('orcamento',$projeto->id)}}"><button type="button" name="button"><i class="fas fa-edit"></i></button></a>
   </div>
-  <div class="estimativas">
-    <h1 name="titulo">PROJEÇÕES</h1>
-    <h4 value="TEMPO TOTAL ESTIMADO: ">{{gmdate('H:i:s',$listaPecasProjeto->sum('sectempoestimado'))}}</h4>
-    <h4 value="CUSTO TOTAL ESTIMADO: ">{{$listaPecasProjeto->sum('custoestimado')}}</h4>
-  </div> --}}
 @endsection

@@ -288,3 +288,34 @@ button[name='editar-orcamento']:hover
   font-weight: bold;
   text-align: center;
 }
+
+.finalizar-projeto
+{
+  margin: auto;
+  margin-top: 2em;
+  padding: 3em;
+  position: relative;
+  width: 95%;
+}
+
+.finalizar-projeto button
+{
+  background-color: #555;
+  border: none;
+  border-radius: 0.3em;
+  box-shadow: 1px 1px 15px grey;
+  color: white;
+  font-size: 1.5em;
+  font-weight: bold;
+  padding: 0.7em;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  transition: 0.4s;
+}
+
+.finalizar-projeto button:hover
+{
+  background-color: black;
+}

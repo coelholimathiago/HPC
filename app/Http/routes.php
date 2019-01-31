@@ -34,6 +34,10 @@ Route::group(['prefix' => 'projetos'], function ()
 
     Route::post('orcamento/salvar','OrcamentoController@salvar')->name('salvarOrcamento');
 
+    Route::get('abertos/finalizar/{id}','ProjetoController@finalizar')->name('finalizarProjeto');
+
+    Route::get('abertos/reiniciar/{id}','ProjetoController@reiniciar')->name('reiniciarProjeto');
+
     Route::get('fechados','MainController@projetosFechados');
 
     Route::get('aguardando','MainController@projetosAguardando');
