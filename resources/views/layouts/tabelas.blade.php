@@ -5,9 +5,6 @@
 @endpush
 
 @section('conteudo')
-  <div class="controle-janelas">
-    @yield('janelas')
-  </div>
   <div class="cabecalho-elementos">
     @yield('titulo-elementos')
     @yield('pesquisa-elementos')

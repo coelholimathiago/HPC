@@ -1,10 +1,5 @@
 @extends('layouts.tabelas')
 
-@section('janelas')
-  <a href="{{route('home')}}"><i class="fas fa-home"></i></a>
-  <strong>> LISTA DE PEÇAS</strong>
-@endsection
-
 @section('titulo-elementos')
   <h4>LISTA DE PEÇAS</h4>
 @endsection

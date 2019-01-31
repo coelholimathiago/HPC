@@ -16,8 +16,30 @@
   </head>
   <body>
     <div class="painel">
-      @yield('painel')
-      <img src="/img/Soluções-Industriais-fundo-pnG-sem-risquinho-1024x256.png" alt="">
+      <ul>
+        <li><a href="{{route('home')}}"><img src="/img/Soluções-Industriais-fundo-pnG-sem-risquinho-1024x256.png" alt=""></a></li>
+        <div class="dropdown">
+          <button class="dropbtn">PROJETOS</button>
+          <div class="dropdown-content">
+            <a href="{{url('/projetos/abertos')}}">Abertos <i class="fas fa-box-open"></i></a>
+            <a href="{{url('/projetos/aguardando')}}">Aguardando</a>
+            <a href="{{url('/projetos/fechados')}}">Fechados <i class="fas fa-boxes"></i></a>
+            <a href="{{url('/projetos/novo')}}">Novo <i class="fas fa-file"></i></a>
+          </div>
+        </div>
+        <div class="dropdown">
+          <button class="dropbtn">CADASTROS</button>
+          <div class="dropdown-content">
+            <a href="{{url('/cadastro/cliente')}}">Clientes <i class="fas fa-address-book"></i></a>
+            <a href="{{url('/cadastro/funcionario')}}">Funcionários <i class="fas fa-handshake"></i></a>
+            <a href="{{url('/cadastro/maquina')}}">Máquinas <i class="fas fa-wrench"></i></a>
+            <a href="/peca">Peças</a>
+          </div>
+        </div>
+        <div class="dropdown">
+          <a href="{{url('/rastreamento')}}"><button class="dropbtn">RASTREAMENTO</button></a>
+        </div>
+      </ul>
     </div>
     <div class="content">
       @yield('conteudo')

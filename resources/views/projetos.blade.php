@@ -9,15 +9,7 @@
   Projetos | HPC
 @endsection
 
-@section('painel')
-  <input type="text" name="pesquisa" placeholder="Pesquisar...">
-@endsection
-
 @section('conteudo')
-  <div class="controle-janelas">
-    <a href="{{route('home')}}"><i class="fas fa-home"></i></a>
-    <strong> > {{$titulo}}</strong>
-  </div>
   @if (count($resumoProjetos) > 0)
     @foreach ($resumoProjetos as $projeto)
       <div class="resumo-projeto">

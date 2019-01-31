@@ -5,10 +5,6 @@
 @endpush
 
 @section('conteudo')
-  <div class="controle-janelas">
-    <a href="{{route('home')}}"><i class="fas fa-home"></i></a>
-    <strong> > RASTREAMENTO</strong>
-  </div>
   <form class="busca-rastreamento" action="{{route('buscaRastreamento')}}" method="post">
     {!! csrf_field() !!}
     <select class="" name="codigoFuncionario">
