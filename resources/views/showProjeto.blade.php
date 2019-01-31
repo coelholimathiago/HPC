@@ -137,7 +137,7 @@
     @if ($projeto->status == "aberto")
       <a href="{{route('finalizarProjeto',$projeto->id)}}"><button type="button" name="button">Finalizar projeto <i class="fas fa-download"></i></button></a>
     @else
-      <a href="{{route('reiniciarProjeto',$projeto->id)}}"><button type="button" name="button">Reabrir projeto <i class="fas fa-upload"></i></button></a>
+      <a href="{{route('reiniciarProjeto',$projeto->id)}}"><button type="button" name="button">Abrir projeto <i class="fas fa-upload"></i></button></a>
     @endif
   </div>
 @endsection
