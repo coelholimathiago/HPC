@@ -9,12 +9,6 @@
 @endsection
 
 @section('conteudo')
-  <div class="controle-janelas">
-    <a href="{{route('home')}}"><i class="fas fa-home"></i></a>
-    <strong>></strong>
-    <a href="{{route('projetosAbertos')}}"><strong>PROJETOS ABERTOS</strong></a>
-    <strong>> DETALHES PROJETO</strong>
-  </div>
   <div class="controle-projeto">
     <div class="info">
       <h3 class="titulo" value="{{$projeto->id}}">{{$projeto->nome}}</h3>
