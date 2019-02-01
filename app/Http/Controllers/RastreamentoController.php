@@ -5,8 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use App\Models\Projetos as Projetos;
 use App\Models\Rastreamento as Rastreamento;
 use App\Models\Funcionarios as Funcionarios;
+use App\Models\Maquinas as Maquinas;
+use App\Models\TemposPecas as Tempos;
 use DB;
 use Validator;
 use Illuminate\Support\MessageBag as Erros;
@@ -26,6 +29,7 @@ class RastreamentoController extends Controller
     public function busca(Request $request)
     {
       $funcionarios = new Funcionarios;
+      $maquinas = Maquinas::all();
       $buscaFuncionario = $funcionarios->find($request->codigoFuncionario);
       if($buscaFuncionario != null)
       {
@@ -35,7 +39,7 @@ class RastreamentoController extends Controller
         }
         else
         {
-          return view('rastreamento.menuIniciar',compact('buscaFuncionario'));
+          return view('rastreamento.menuIniciar',compact('buscaFuncionario','maquinas'));
         }
       }
       else
@@ -47,15 +51,40 @@ class RastreamentoController extends Controller
     public function iniciar(Request $request)
     {
       $barcode = explode(".",$request->barcode);
-      $idpecaprojeto = $barcode[0];
-      $idtempospecas = $barcode[4];
-      $log = new Rastreamento;
-      $log->idpecaprojeto = $idpecaprojeto;
-      $log->idtempospecas = $idtempospecas;
-      $log->funcionario = $request->funcionario;
-      $log->status = "EM ANDAMENTO";
-      $log->save();
-      return redirect('rastreamento');
+      $idProjeto = $barcode[1];
+      $infoProjeto = Projetos::find($idProjeto);
+      if($infoProjeto->status == 'aberto')
+      {
+        $idpecaprojeto = $barcode[0];
+        $pecasProjeto = $infoProjeto->pecas->find($idpecaprojeto);
+        if(count($pecasProjeto) > 0)
+        {
+          $idtempospecas = $barcode[4];
+          $tempos = Tempos::find($idtempospecas);
+          if(count($tempos) > 0)
+          {
+            $log = new Rastreamento;
+            $log->idpecaprojeto = $idpecaprojeto;
+            $log->idtempospecas = $idtempospecas;
+            $log->funcionario = $request->funcionario;
+            $log->status = "EM ANDAMENTO";
+            $log->save();
+            return redirect('rastreamento');
+          }
+          else
+          {
+            return "Tempos não cadastrados!!";
+          }
+        }
+        else
+        {
+          return "Peça não cadastrada no projeto!";
+        }
+      }
+      else
+      {
+        return "Projeto Fechado!!";
+      }
     }
 
     public function finalizar(Request $request)

@@ -13,7 +13,11 @@
       <form class="" action="{{route('iniciaRastreamento')}}" method="post">
         {!! csrf_field() !!}
         <input type="hidden" name="funcionario" value="{{$buscaFuncionario->id}}">
-        <input type="text" name="maquina" value="" placeholder="Máquina" required>
+        <select class="" name="maquina">
+          @foreach ($maquinas as $maquina)
+            <option value="{{$maquina->id}}">{{$maquina->descricao}}</option>
+          @endforeach
+        </select>
         <input type="text" name="barcode" value="" placeholder="Código de barras" required>
         <button type="submit" name="button">Iniciar <i class="fas fa-play"></i></button>
       </form>

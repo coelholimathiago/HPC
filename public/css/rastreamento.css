@@ -100,6 +100,18 @@
   width: 100%;
 }
 
+.novo select
+{
+  background-color: white;
+  border: solid 1px lightgrey;
+  border-radius: 0.3em;
+  box-shadow: 1px 1px 10px grey;
+  font-size: 1.5em;
+  margin-bottom: 1em;
+  padding: 0.3em;
+  width: 100%;
+}
+
 .novo button
 {
   background-color: crimson;
