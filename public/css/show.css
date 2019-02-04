@@ -1,0 +1,51 @@
+.detalhes
+{
+  margin: auto;
+  margin-top: 1em;
+  width: 60%;
+}
+
+.titulo-detalhes
+{
+  border-bottom: solid 5px crimson;
+  font-size: 1.2em;
+  font-weight: bold;
+  padding: 0.1em;
+  text-align: center;
+}
+
+.formulario-detalhes form
+{
+  margin: auto;
+  width: 70%;
+}
+
+.formulario-detalhes label
+{
+  font-size: 1em;
+  padding: 0.3em;
+}
+
+.formulario-detalhes input
+{
+  margin-bottom: 1em;
+}
+
+.formulario-detalhes button
+{
+  background-color: crimson;
+  border: none;
+  border-radius: 0.3em;
+  box-shadow: 1px 1px 15px grey;
+  color: white;
+  font-size: 1.2em;
+  font-weight: bold;
+  padding: 0.5em;
+  margin-top: 1.5em;
+  width: 100%;
+}
+
+.formulario-detalhes button:hover
+{
+  
+}

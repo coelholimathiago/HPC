@@ -50,6 +50,8 @@ Route::group(['prefix' => 'cadastro'], function ()
     Route::resource('cliente','ClienteController');
 
     Route::resource('funcionario','FuncionarioController');
+
+    Route::resource('centrocusto','CentroCustoController');
 });
 
 Route::resource('peca','PecaController');
