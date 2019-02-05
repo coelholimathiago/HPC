@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 
 use App\Models\Maquinas as Maquinas;
+use App\Models\CentroCusto as CentroCusto;
 
 class MaquinasController extends Controller
 {
@@ -35,7 +36,8 @@ class MaquinasController extends Controller
      */
     public function create()
     {
-      return view('cadastros.maquina');
+      $listaCentros = CentroCusto::all();
+      return view('cadastros.maquina',compact('listaCentros'));
     }
 
     /**
@@ -52,6 +54,7 @@ class MaquinasController extends Controller
       $this->maquinas->ano = $request->ano;
       $this->maquinas->preco = $request->preco;
       $this->maquinas->custohora = $request->custohora;
+      $this->maquinas->idcentrocusto = $request->centroCusto;
       try {
         $this->maquinas->save();
         return redirect()->route('cadastro.maquina.index');
@@ -83,7 +86,8 @@ class MaquinasController extends Controller
     public function edit($id)
     {
       $infoMaquinas = $this->maquinas->find($id);
-      return view('cadastros.maquina',compact('infoMaquinas'));
+      $listaCentros = CentroCusto::all()->sortBy('centro');
+      return view('cadastros.maquina',compact('infoMaquinas','listaCentros'));
     }
 
     /**
@@ -102,6 +106,7 @@ class MaquinasController extends Controller
       $infoMaquina->ano = $request->ano;
       $infoMaquina->preco = $request->preco;
       $infoMaquina->custohora = $request->custohora;
+      $infoMaquina->idcentrocusto = $request->centroCusto;
       try
       {
         $infoMaquina->save();
