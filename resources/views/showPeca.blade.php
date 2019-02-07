@@ -1,18 +1,19 @@
-@extends('layouts.main')
+@extends('layouts.show')
 
-@section('conteudo')
-  <h1>DETALHES DA PEÇA</h1>
-  <h4>{{$infoPeca->codigo}}</h4>
-  <h4>{{$infoPeca->descricao}}</h4>
-  <h4>{{$infoPeca->material}}</h4>
-  @foreach ($tempos as $tempo)
-    <h4>{{$tempo->descricao}}</h4>
-    <h4>{{$tempo->tempoestimado}}</h4>
-    <h4>{{$tempo->custo}}</h4>
-  @endforeach
+@section('titulo-detalhes')
+  DETALHES DA PEÇA
+@endsection
+
+@section('formulario-detalhes')
   <form action="{{route('peca.destroy',$infoPeca->id)}}" method="post">
     {!! csrf_field() !!}
     <input type="hidden" name="_method" value="DELETE">
+    <label for="centroCusto">Código da peça :</label>
+    <input class="form-control" type="text" value="{{$infoPeca->codigo}}" disabled>
+    <label for="centroCusto">Descrição :</label>
+    <input class="form-control" type="text" value="{{$infoPeca->descricao}}" disabled>
+    <label for="centroCusto">Matéria-prima :</label>
+    <input class="form-control" type="text" value="{{$infoPeca->material}}" disabled>
     <button type="submit" name="button">Deletar esta peça</button>
   </form>
 @endsection

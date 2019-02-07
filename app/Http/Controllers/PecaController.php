@@ -8,6 +8,7 @@ use App\Http\Requests;
 use DB;
 use App\Models\MateriaPrima as MP;
 use App\Models\Maquinas as Maquinas;
+use App\Models\CentroCusto as CentroCusto;
 use App\Models\Pecas as Pecas;
 use App\Models\TemposPecas as TemposPecas;
 use Picqer\Barcode\BarcodeGeneratorHTML as BC;
@@ -36,10 +37,9 @@ class PecaController extends Controller
     public function create()
     {
       $materiaPrima = new MP;
-      $maquinas = new Maquinas;
+      $listaCentros = CentroCusto::all();
       $listaMP = $materiaPrima->all();
-      $listaMaquinas = $maquinas->all();
-      return view('cadastros.peca',compact('listaMP','listaMaquinas'));
+      return view('cadastros.peca',compact('listaMP','listaCentros'));
     }
 
     /**
@@ -67,7 +67,7 @@ class PecaController extends Controller
         $temposPecas = new TemposPecas;
         $temposPecas->codigo = $request->codigo;
         $temposPecas->idpeca = $pecas->id;
-        $temposPecas->idmaquina = $request->maquina[$i];
+        $temposPecas->idcentrocusto = $request->maquina[$i];
         $temposPecas->descricao = $request->operacao[$i];
         $temposPecas->tempoestimado = $request->tempoestimado[$i];
         try
@@ -114,19 +114,12 @@ class PecaController extends Controller
      */
     public function edit($id)
     {
-      $pecas = new Pecas;
-      $temposPecas = new TemposPecas;
-      $materiaPrima = new MP;
-      $maquinas = new Maquinas;
-      $infoPeca = $pecas->find($id);
-      $tempos = $temposPecas
-                ->join('maquinas','tempospecas.idmaquina','=','maquinas.id')
-                ->select('tempospecas.*','maquinas.descricao as maquina')
-                ->where('codigo',$infoPeca->codigo)->get();
-      $material = $materiaPrima->where('id',$infoPeca->idmateriaprima)->get()->first();
-      $listaMP = $materiaPrima->all();
-      $listaMaquinas = $maquinas->all();
-      return view('cadastros.peca',compact('infoPeca','tempos','material','listaMP','listaMaquinas'));
+      $infoPeca = Pecas::find($id);
+      $material = $infoPeca->materiaPrima->material;
+      $tempos = $infoPeca->tempos;
+      $listaMP = MP::all();
+      $listaCentros = CentroCusto::all();
+      return view('cadastros.peca',compact('infoPeca','tempos','material','listaMP','listaCentros'));
     }
 
     /**
@@ -138,42 +131,36 @@ class PecaController extends Controller
      */
     public function update(Request $request, $id)
     {
-      $pecas = new Pecas;
-      $infoPeca = $pecas::find($id);
+      $infoPeca = Pecas::find($id);
       $infoPeca->codigo = $request->codigo;
       $infoPeca->descricao = $request->descricao;
       $infoPeca->idmateriaprima = $request->materiaprima;
       if($infoPeca->save())
       {
-        if($request->qtdMaquinas != "")
+        $infoPeca->tempos()->delete();
+        for ($i=0; $i < $request->qtdMaquinas ; $i++)
         {
-          if(count($infoPeca->tempos) > 0)
+          $temposPecas = new TemposPecas;
+          $temposPecas->codigo = $request->codigo;
+          $temposPecas->idpeca = $id;
+          $temposPecas->idcentrocusto = $request->maquina[$i];
+          $temposPecas->descricao = $request->operacao[$i];
+          $temposPecas->tempoestimado = $request->tempoestimado[$i];
+          try
           {
-            $infoPeca->tempos()->delete();
+            $temposPecas->save();
           }
-          for ($i=0; $i < $request->qtdMaquinas ; $i++)
+          catch (Exception $e)
           {
-            $temposPecas = new TemposPecas;
-            $temposPecas->codigo = $request->codigo;
-            $temposPecas->idpeca = $id;
-            $temposPecas->idmaquina = $request->maquina[$i];
-            $temposPecas->descricao = $request->operacao[$i];
-            $temposPecas->tempoestimado = $request->tempoestimado[$i];
-            try
-            {
-              $temposPecas->save();
-              return redirect()->route('peca.index');
-            }
-            catch (Exception $e)
-            {
-              dd($e);
-            }
+            dd($e);
           }
+          unset($temposPecas);
         }
+        return redirect()->route('peca.index');
       }
       else
       {
-        return "Erro ao atualizar a peça!";
+        return "Falha ao atualziar descricao";
       }
     }
 

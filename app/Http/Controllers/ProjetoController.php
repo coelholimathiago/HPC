@@ -12,6 +12,7 @@ use App\Models\TemposPecas as TemposPecas;
 use App\Models\Orcamentos as Orcamentos;
 use App\Models\Rastreamento as Rastreamento;
 use Illuminate\Support\MessageBag as Erros;
+use Illuminate\Database\QueryException as ErrosQuery;
 use DB;
 
 class ProjetoController extends Controller
@@ -31,8 +32,6 @@ class ProjetoController extends Controller
     {
       $pecas = new Pecas;
       $infoPeca = $pecas->where('codigo',$request->peca)->first();
-      $tempoEstimado = $infoPeca->tempos()->select(DB::raw('sum(time_to_sec(tempoestimado)) as tempoestimadopeca'))->first();
-      $custoEstimado = $infoPeca->tempos()->sum('custoestimado');
       $pecaProjeto = new PecasProjetos;
       $verifProj = $pecaProjeto->where([
                   ['idprojeto','=',$request->projeto],
@@ -44,16 +43,19 @@ class ProjetoController extends Controller
         $pecaProjeto->idpeca = $infoPeca->id;
         $pecaProjeto->idmateriaprima = $infoPeca->idmateriaprima;
         $pecaProjeto->quantidade = $request->quantidade;
-        $pecaProjeto->tempoestimado = gmdate("H:i:s",$tempoEstimado->tempoestimadopeca * $request->quantidade);
-        $pecaProjeto->custoestimado = $custoEstimado * $request->quantidade;
         try
         {
           $pecaProjeto->save();
           return back();
         }
-        catch (Exception $e)
+        catch (ErrosQuery $e)
         {
-          dd($e);
+          $errors = new Erros;
+
+          // add your error messages:
+          $errors->add('peca_sem_tempos', 'Esta peça não tem tempos cadastrados ainda!');
+
+          return back()->withErrors($errors);
         }
       }
       else

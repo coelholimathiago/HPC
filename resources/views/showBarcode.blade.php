@@ -19,12 +19,12 @@
       <div class="rastreamento">
         <div class="info">
           <h4 value="Peça : ">{{$operacao->codigo}}</h4>
-          <h4 value="Máquina : ">{{$operacao->maquina->descricao}}</h4>
+          <h4 value="Máquina : ">{{$operacao->centroCusto->centro}}</h4>
           <h4 value="Descrição : ">{{$operacao->descricao}}</h4>
           <h4 value="Tempo estimado : ">{{$operacao->tempoestimado}}</h4>
         </div>
         <svg class="barcode"
-          jsbarcode-value="{{$pecasProjeto->id.".".$pecasProjeto->idprojeto.".".$operacao->codigo.".".$operacao->idpeca.".".$operacao->id.".".$operacao->idmaquina.".".$pecasProjeto->idmateriaprima}}"
+          jsbarcode-value="{{$pecasProjeto->id.".".$pecasProjeto->idprojeto.".".$operacao->codigo.".".$operacao->idpeca.".".$operacao->id.".".$operacao->idcentrocusto.".".$pecasProjeto->idmateriaprima}}"
           jsbarcode-textmargin="0"
           jsbarcode-fontoptions="bold">
         </svg>

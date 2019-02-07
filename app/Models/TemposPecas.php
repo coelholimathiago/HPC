@@ -8,8 +8,8 @@ class TemposPecas extends Model
 {
     protected $table = 'tempospecas';
 
-    public function maquina()
+    public function centroCusto()
     {
-      return $this->belongsTo('App\Models\Maquinas','idmaquina','id');
+      return $this->belongsTo('App\Models\CentroCusto','idcentrocusto','id');
     }
 }

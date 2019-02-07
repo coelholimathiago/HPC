@@ -28,7 +28,7 @@
     <select class="form-control" name="materiaprima">
       @foreach ($listaMP as $mp)
         @if (isset($material))
-          @if ($material->material == $mp->material)
+          @if ($material == $mp->material)
             <option value="{{$mp->id}}" selected>{{$mp->material}}</option>
           @else
             <option value="{{$mp->id}}">{{$mp->material}}</option>
@@ -44,7 +44,7 @@
         <table>
           @foreach ($tempos as $tempo)
             <tr>
-              <td>{{$tempo->maquina}}</td>
+              <td>{{$tempo->centroCusto->centro}}</td>
               <td>{{$tempo->descricao}}</td>
               <td>{{$tempo->tempoestimado}}</td>
             </tr>
@@ -53,7 +53,7 @@
       </div>
     @endif
     <div class="titulo">Quantidade de etapas:</div>
-    <select class="form-control" name="qtdMaquinas">
+    <select class="form-control" name="qtdMaquinas" required>
       <option></option>
       <option value="1">1</option>
       <option value="2">2</option>
@@ -76,8 +76,8 @@
       <div class="maquina">
         <h4>Máquina: </h4>
         <select class="form-control">
-          @foreach ($listaMaquinas as $maquinas)
-            <option value="{{$maquinas->id}}">{{$maquinas->descricao}}</option>
+          @foreach ($listaCentros as $centros)
+            <option value="{{$centros->id}}">{{$centros->centro}}</option>
           @endforeach
         </select>
         <h4>Tempo estimado: </h4>
