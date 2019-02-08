@@ -27,6 +27,10 @@
     <input type="text" class="form-control" name="telefone" value="{{$infoCliente->telefone or old('telefone')}}" required>
     <div class="titulo">Email:</div>
     <input type="email" class="form-control" name="email" value="{{$infoCliente->email or old('email')}}" required>
+    <div class="titulo">CNPJ:</div>
+    <input type="text" class="form-control" name="cnpj" value="{{$infoCliente->cnpj or old('cnpj')}}" required>
+    <div class="titulo">Inscrição Estadual:</div>
+    <input type="text" class="form-control" name="inscricao" value="{{$infoCliente->inscricaoestadual or old('inscricao')}}" required>
     <button type="submit" name="salvar">SALVAR <i class="fas fa-save"></i></button>
   </form>
 @endsection

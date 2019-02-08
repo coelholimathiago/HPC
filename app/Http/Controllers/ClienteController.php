@@ -51,6 +51,8 @@ class ClienteController extends Controller
       $this->clientes->endereco = $request->endereco;
       $this->clientes->telefone = $request->telefone;
       $this->clientes->email = $request->email;
+      $this->clientes->cnpj = $request->cnpj;
+      $this->clientes->inscricaoestadual = $request->inscricao;
       try {
         $this->clientes->save();
         return redirect()->route('cadastro.cliente.index');
@@ -99,6 +101,8 @@ class ClienteController extends Controller
       $infoCliente->endereco = $request->endereco;
       $infoCliente->telefone = $request->telefone;
       $infoCliente->email = $request->email;
+      $infoCliente->cnpj = $request->cnpj;
+      $infoCliente->inscricaoestadual = $request->inscricao;
       try
       {
         $infoCliente->save();

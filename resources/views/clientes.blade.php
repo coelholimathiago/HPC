@@ -19,6 +19,8 @@
       <th>ENDEREÇO</th>
       <th>TELEFONE</th>
       <th>EMAIL</th>
+      <th>CNPJ</th>
+      <th>INSC. ESTADUAL</th>
       <th>AÇÕES</th>
     </thead>
     <tbody>
@@ -28,6 +30,8 @@
           <td align="center">{{$cliente['endereco']}}</td>
           <td align="center">{{$cliente['telefone']}}</td>
           <td align="center">{{$cliente['email']}}</td>
+          <td align="center">{{$cliente['cnpj']}}</td>
+          <td align="center">{{$cliente['inscricaoestadual']}}</td>
           <td align="center">
             <a href="{{route('cadastro.cliente.edit',$cliente->id)}}"><button type="button" name="button"><i class="fas fa-edit"></i></button></a>
             <a href="{{route('cadastro.cliente.show',$cliente->id)}}"><button type="button" name="button"><i class="fas fa-eye"></i></button></a>
