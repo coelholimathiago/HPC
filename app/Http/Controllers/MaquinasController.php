@@ -53,7 +53,6 @@ class MaquinasController extends Controller
       $this->maquinas->fabricante = $request->fabricante;
       $this->maquinas->ano = $request->ano;
       $this->maquinas->preco = $request->preco;
-      $this->maquinas->custohora = $request->custohora;
       $this->maquinas->idcentrocusto = $request->centroCusto;
       try {
         $this->maquinas->save();
@@ -105,7 +104,6 @@ class MaquinasController extends Controller
       $infoMaquina->fabricante = $request->fabricante;
       $infoMaquina->ano = $request->ano;
       $infoMaquina->preco = $request->preco;
-      $infoMaquina->custohora = $request->custohora;
       $infoMaquina->idcentrocusto = $request->centroCusto;
       try
       {

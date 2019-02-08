@@ -1,22 +1,19 @@
-@extends('layouts.main')
+@extends('layouts.show')
 
-@section('conteudo')
-  <h1>DETALHES FUNCIONÁRIO</h1>
-  <p>
-    <label for="nome">Nome:</label>
-    <h4 name="nome">{{$dadosFuncionario->nome}}</h4>
-  </p>
-  <p>
-    <label for="cargo">Cargo:</label>
-    <h4 name="cargo">{{$dadosFuncionario->cargo}}</h4>
-  </p>
-  <p>
-    <label for="custohora">Custo/hora:</label>
-    <h4 name="custohora">{{$dadosFuncionario->custohora}}</h4>
-  </p>
+@section('titulo-detalhes')
+  DETALHES FUNCIONÁRIO
+@endsection
+
+@section('formulario-detalhes')
   <form class="" action="{{route('cadastro.funcionario.destroy',$dadosFuncionario->id)}}" method="post">
     {!! csrf_field() !!}
     <input type="hidden" name="_method" value="DELETE">
+    <label for="nome">Nome:</label>
+    <input class="form-control" type="text" name="nome" value="{{$dadosFuncionario->nome}}">
+    <label for="cargo">Cargo:</label>
+    <input class="form-control" type="text" name="cargo" value="{{$dadosFuncionario->cargo}}">
+    <label for="custohora">Custo/hora:</label>
+    <input class="form-control" type="text" name="custohora" value="{{$dadosFuncionario->custohora}}">
     <button type="submit" name="button">Deletar funcionário</button>
   </form>
 @endsection

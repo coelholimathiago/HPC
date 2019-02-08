@@ -22,8 +22,6 @@
     <input type="text" class="form-control" name="ano" value="{{$infoMaquinas->ano or old('ano')}}" required>
     <div class="titulo">Preço:</div>
     <input type="text" class="form-control" name="preco" value="{{$infoMaquinas->preco or old('preco')}}" required>
-    <div class="titulo">Custo / hora:</div>
-    <input type="text" class="form-control" name="custohora" value="{{$infoMaquinas->custohora or old('custohora')}}" required>
     <div class="titulo">Centro de custo:</div>
     <select class="form-control" name="centroCusto" required>
       @foreach ($listaCentros as $centro)

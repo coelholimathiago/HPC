@@ -76,9 +76,9 @@
       <div class="slider">
         <p id="margemSelecionada"></p>
         @if (isset($margemLucro) != null)
-          <input type="range" id="margemLucro" name="margemLucro" class="slider" min="0" max="200" value="{{$margemLucro}}">
+          <input type="range" id="margemLucro" name="margemLucro" class="slider" min="0" max="500" value="{{$margemLucro}}">
         @else
-          <input type="range" id="margemLucro" name="margemLucro" class="slider" min="0" max="200" value="35">
+          <input type="range" id="margemLucro" name="margemLucro" class="slider" min="0" max="500" value="35">
         @endif
       </div>
     </div>

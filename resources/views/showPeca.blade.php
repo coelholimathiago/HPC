@@ -13,7 +13,7 @@
     <label for="centroCusto">Descrição :</label>
     <input class="form-control" type="text" value="{{$infoPeca->descricao}}" disabled>
     <label for="centroCusto">Matéria-prima :</label>
-    <input class="form-control" type="text" value="{{$infoPeca->material}}" disabled>
+    <input class="form-control" type="text" value="{{$infoPeca->materiaPrima->material}}" disabled>
     <button type="submit" name="button">Deletar esta peça</button>
   </form>
 @endsection

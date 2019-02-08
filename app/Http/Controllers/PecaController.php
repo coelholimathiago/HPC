@@ -91,18 +91,7 @@ class PecaController extends Controller
      */
     public function show($id)
     {
-      $pecas = new Pecas;
-      $temposPecas = new TemposPecas;
-      $infoPeca = $pecas
-                  ->join('materiaprima','pecas.idmateriaprima','=','materiaprima.id')
-                  ->select('pecas.*','materiaprima.material')
-                  ->where('pecas.id',$id)
-                  ->first();
-      $tempos = $temposPecas
-                ->join('maquinas','tempospecas.idmaquina','=','maquinas.id')
-                ->where('tempospecas.codigo',$infoPeca->codigo)
-                ->select('tempospecas.*','maquinas.descricao','maquinas.custohora',DB::raw('time_to_sec(tempospecas.tempoestimado)*maquinas.custohora/3600 as custo'))
-                ->get();
+      $infoPeca = Pecas::find($id);
       return view('showPeca',compact('infoPeca','tempos'));
     }
 
