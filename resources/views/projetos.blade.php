@@ -19,6 +19,8 @@
         <div class="resumo-descricao">
           <h2 name="projeto">{{$projeto->nome}}</h2>
           <h4 name="cliente">{{$projeto->cliente}}</h4>
+        </div>
+        <div class="data-prevista">
           <h4 name="dataPrevista"><i class="far fa-calendar-alt"></i> {{date_format(date_create($projeto->dataprevista),'d/m/Y')}}</h4>
         </div>
         <a href="{{route('detalhesProjeto',$projeto->id)}}"><button type="button" name="button">+</button></a>
@@ -26,7 +28,7 @@
     @endforeach
   @else
     <div class="projetos-vazio">
-      <h4><i class="fas fa-exclamation-triangle"></i> Sem projetos finalizados!</h4>
+      <h4><i class="fas fa-exclamation-triangle"></i> Sem projetos em aberto!</h4>
     </div>
   @endif
 @endsection

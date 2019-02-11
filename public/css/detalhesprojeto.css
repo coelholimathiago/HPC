@@ -1,29 +1,261 @@
-[class*='col-']
+.dados-projeto
 {
-  float: left;
+  margin: auto;
+  width: 95%;
+}
+
+section
+{
+  clear: both;
   position: relative;
 }
 
-.controle-janelas
+.info-geral [name="titulo"]
 {
-  background-color: black;
-  color: white;
-  padding-top: 0.2em;
-  padding-bottom: 0.2em;
+  color: crimson;
+  float: left;
+  font-size: 2.5em;
+  font-weight: bold;
 }
 
-.controle-janelas a
+.info-geral [name="titulo"]::after
+{
+  content: "ID : "attr(value)"";
+  display: block;
+  color: black;
+  font-size: 0.8em;
+  text-align: left;
+}
+
+.info-geral [name="data-prevista"]
+{
+  color: crimson;
+  float: right;
+  font-size: 2.5em;
+  font-weight: bold;
+}
+
+.info-geral [name="data-prevista"]::before
+{
+  color: black;
+  content: attr(value);
+}
+
+.cadastros
+{
+  border-top: solid 3px black;
+  display: grid;
+  grid-template-columns: 75% 25%;
+  min-height: 8em;
+}
+
+.cadastro-existente
+{
+  position: relative;
+}
+
+.cadastro-existente form
+{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  width: 70%;
+}
+
+.cadastro-peca input
+{
+  border: solid 1px lightgrey;
+  border-radius: 0.5em;
+  box-shadow: 1px 1px 5px grey;
+  font-size: 1.5em;
+  padding: 0.2em;
+  margin: 0.25em;
+  text-align: center;
+}
+
+.cadastro-peca button
+{
+  background-color: #555;
+  border: none;
+  border-radius: 0.25em;
+  box-shadow: 1px 1px 10px black;
+  color: white;
+  transition: 0.3s;
+}
+
+.cadastro-peca button:hover
+{
+  background-color: black;
+}
+
+.cadastro-novo
+{
+  position: relative;
+}
+
+.cadastro-novo button
+{
+  background-color: crimson;
+  border: none;
+  border-radius: 0.25em;
+  box-shadow: 1px 1px 10px black;
+  color: white;
+  font-size: 1.5em;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  transition: 0.3s;
+  width: 75%;
+}
+
+.cadastro-novo button:hover
+{
+  background-color: #a30f2d;
+}
+
+.grupo [name='titulo']
+{
+  border-bottom:  solid 5px crimson;
+  font-size: 1.2em;
+  font-weight: bold;
+  padding: 0.5em;
+  text-align: center;
+}
+
+.pecas
+{
+  margin-bottom: 3.5em;
+}
+
+.grupo p
+{
+  font-size: 2.5em;
+  text-align: center;
+}
+
+.grupo p::after
+{
+  content: attr(msg);
+  display: block;
+}
+
+.tabelas-projeto
+{
+  margin: auto;
+  width: 100%;
+}
+
+.tabelas-projeto thead
+{
+  border-bottom: solid 5px crimson;
+}
+
+.tabelas-projeto th
+{
+  font-size: 1.2em;
+  padding: 2px;
+  text-align: center;
+}
+
+.tabelas-projeto tbody
+{
+  box-shadow: 1px 1px 10px grey;
+}
+
+.tabelas-projeto td
+{
+  border-bottom: solid 1px lightgrey;
+  padding: 5px;
+  text-align: center;
+}
+
+.tabelas-projeto button
 {
   color: white;
-  margin-left: 1em;
+  background-color: #555;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.5em;
+  width: 100%;
+}
+
+.acoes
+{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.orcamento-projeto
+{
+  margin-bottom: 3em;
+  position: relative;
+}
+
+button[name='editar-orcamento']
+{
+  background-color: #555;
+  border: none;
+  border-radius: 50%;
+  box-shadow: 1px 1px 15px black;
+  color: white;
+  font-size: 2em;
+  font-weight: bold;
+  height: 2em;
+  position: absolute;
+  right: 2%;
+  top: 80%;
+  transform: translate(0%,-50%);
+  transition: 0.3s;
+  width: 2em;
+}
+
+button[name='editar-orcamento']:hover
+{
+  background-color: black;
+}
+
+
+.finaliza-projeto
+{
+  padding: 2em;
+}
+
+.finaliza-projeto button
+{
+  background-color: #555;
+  border: none;
+  border-radius: 0.3em;
+  box-shadow: 1px 1px 15px grey;
+  color: white;
+  font-size: 1.5em;
+  font-weight: bold;
+  padding: 0.7em;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  transition: 0.4s;
+}
+
+.finaliza-projeto button:hover
+{
+  background-color: black;
+}
+/*[class*='col-']
+{
+  float: left;
+  position: relative;
 }
 
 .controle-projeto
 {
   display: grid;
   grid-template-columns: 25% 50% 25%;
-  height: 10em;
   position: relative;
+  margin-top: 10em;
 }
 
 .info
@@ -318,4 +550,4 @@ button[name='editar-orcamento']:hover
 .finalizar-projeto button:hover
 {
   background-color: black;
-}
+}*/

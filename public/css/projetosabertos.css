@@ -1,45 +1,24 @@
-.painel input
-{
-  border: none;
-  border-radius: 0.5em;
-  font-size: 1.5em;
-  position: absolute;
-  margin-left: 1em;
-  text-align: center;
-  top: 50%;
-  transform: translate(0%,-50%);
-  width: 20%;
-}
-
-.controle-janelas
-{
-  background-color: black;
-  color: white;
-  padding-top: 0.2em;
-  padding-bottom: 0.2em;
-}
-
-.controle-janelas a
-{
-  color: white;
-  margin-left: 1em;
-}
-
 .resumo-projeto
 {
   border: solid 1px lightgrey;
   border-radius: 0.5em;
-  height: 10em;
-  margin: 1em;
+  display: grid;
+  grid-template-columns: 15% 40% 35% 10%;
+  margin: auto;
+  margin-bottom: 0.5em;
+  margin-top: 0.5em;
+  min-height: 10em;
   position: relative;
+  width: 95%;
 }
 
 .resumo-imagem
 {
   height: 10em;
   float: left;
+  margin: auto;
   position: relative;
-  width: 15%;
+  width: 95%;
 }
 
 .resumo-imagem img
@@ -58,7 +37,6 @@
 {
   float: left;
   position: relative;
-  width: 85%;
 }
 
 .resumo-descricao h2
@@ -73,13 +51,18 @@
   font-size: 2em;
 }
 
-.resumo-descricao [name='dataPrevista']
+.data-prevista
 {
-  font-size: 3em;
+  position: relative;
+}
+
+.data-prevista [name='dataPrevista']
+{
+  font-size: 2em;
   position: absolute;
   top: 50%;
-  right: 30%;
-  transform: translate(0%,-25%);
+  left: 50%;
+  transform: translate(-50%,-50%);
 }
 
 
