@@ -38,6 +38,10 @@
         @endif
       @endforeach
     </select>
+    <label class="container">Tornar modelo
+      <input type="checkbox" name="modelo" @if(isset($infoPeca) && $infoPeca->modelo == "SIM") checked @endif>
+      <span class="checkmark"></span>
+    </label>
     @if (isset($tempos) && count($tempos) > 0)
       <div class="tempos-anteriores">
         <h4>Tempos antigos</h4>

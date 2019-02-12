@@ -11,7 +11,7 @@ use App\Models\Maquinas as Maquinas;
 use App\Models\CentroCusto as CentroCusto;
 use App\Models\Pecas as Pecas;
 use App\Models\TemposPecas as TemposPecas;
-use Picqer\Barcode\BarcodeGeneratorHTML as BC;
+use App\Models\PecaModelo as PecaModelo;
 
 class PecaController extends Controller
 {
@@ -26,6 +26,7 @@ class PecaController extends Controller
       $listaPecas = $pecas
                     ->join('materiaprima','pecas.idmateriaprima','=','materiaprima.id')
                     ->select('pecas.*','materiaprima.material')->get();
+      $listaPecas = $listaPecas->sortBy('codigo');
       return view('pecas',compact('listaPecas'));
     }
 
@@ -54,9 +55,16 @@ class PecaController extends Controller
       $pecas->codigo = $request->codigo;
       $pecas->descricao = $request->descricao;
       $pecas->idmateriaprima = $request->materiaprima;
+      if($request->modelo == 'on')
+      {
+        $modelo = new PecaModelo;
+        $pecas->modelo = "SIM";
+      }
       try
       {
         $pecas->save();
+        $modelo->idpeca = $pecas->id;
+        $modelo->save();
       }
       catch (Exception $e)
       {
@@ -124,8 +132,34 @@ class PecaController extends Controller
       $infoPeca->codigo = $request->codigo;
       $infoPeca->descricao = $request->descricao;
       $infoPeca->idmateriaprima = $request->materiaprima;
+      if($request->modelo == 'on')
+      {
+        $infoPeca->modelo = "SIM";
+        $salvarModelo = true;
+        $excluirModelo = false;
+      }
+      else
+      {
+        if($infoPeca->modelo == "SIM")
+        {
+          $infoPeca->modelo = "NÃO";
+          $salvarModelo = false;
+          $excluirModelo = true;
+        }
+      }
       if($infoPeca->save())
       {
+        if($salvarModelo == true)
+        {
+          $modelo = new PecaModelo;
+          $modelo->idpeca = $id;
+          $modelo->save();
+        }
+        if($excluirModelo == true)
+        {
+          $modelo = new PecaModelo;
+          $modelo = $modelo->where('idpeca',$id)->delete();
+        }
         $infoPeca->tempos()->delete();
         for ($i=0; $i < $request->qtdMaquinas ; $i++)
         {
@@ -149,7 +183,7 @@ class PecaController extends Controller
       }
       else
       {
-        return "Falha ao atualziar descricao";
+        return "Falha ao atualizar descricao";
       }
     }
 

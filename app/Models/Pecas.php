@@ -17,4 +17,9 @@ class Pecas extends Model
     {
       return $this->hasMany('App\Models\TemposPecas','idpeca');
     }
+
+    public function modelo()
+    {
+      return $this->belongsTo('App\Models\PecaModelo','idmodelo');
+    }
 }
