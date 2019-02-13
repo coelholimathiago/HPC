@@ -56,6 +56,8 @@ Route::group(['prefix' => 'cadastro'], function ()
 
 Route::resource('peca','PecaController');
 
+Route::get('peca/copia/{id}','PecaController@createByModel')->name('copiaPeca');
+
 Route::get('rastreamento','RastreamentoController@index');
 
 Route::any('rastreamento/busca','RastreamentoController@busca')->name('buscaRastreamento');

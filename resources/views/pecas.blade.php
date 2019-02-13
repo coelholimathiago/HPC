@@ -18,6 +18,7 @@
       <th>CÓDIGO</th>
       <th>DESCRIÇÃO</th>
       <th>MATÉRIA-PRIMA</th>
+      <th>DESENHO</th>
       <th>AÇÕES</th>
     </thead>
     <tbody>
@@ -26,8 +27,12 @@
           <td align="center">{{$peca->codigo}}</td>
           <td>{{$peca->descricao}}</td>
           <td align="center">{{$peca->material}}</td>
+          <td align="center"><i class="far fa-file-pdf"></i></td>
           <td align="center">
             <a href="{{route('peca.edit',$peca->id)}}"><button type="button"><i class="fas fa-edit"></i></button></a>
+            @if ($peca->modelo == "SIM")
+              <a href="{{route('copiaPeca',$peca->id)}}"><button type="button"><i class="far fa-copy"></i></button></a>
+            @endif
             <a href="{{route('peca.show',$peca->id)}}"><button type="button"><i class="fas fa-eye"></i></button></a>
           </td>
         </tr>

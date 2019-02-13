@@ -43,6 +43,28 @@ class PecaController extends Controller
       return view('cadastros.peca',compact('listaMP','listaCentros'));
     }
 
+    public function createByModel($id)
+    {
+      $pecas = Pecas::find($id);
+      $idModelo = PecaModelo::where('idpeca',$id)->first()->id;
+      $ultimoCodigo = $pecas->where('idmodelo',$idModelo)->orderBy('created_at','desc')->first();
+      $ultimoCodigo = explode('-',$ultimoCodigo->codigo);
+      $codigoCopia = $pecas->codigo."-".($ultimoCodigo[1] + 1);
+      $pecaCopia = $pecas->replicate();
+      $pecaCopia->codigo = $codigoCopia;
+      $pecaCopia->idmodelo = $idModelo;
+      $pecaCopia->modelo = "NÃO";
+      $pecaCopia->save();
+      foreach ($pecas->tempos as $tempo)
+      {
+        $temposCopia = $tempo->replicate();
+        $temposCopia->codigo = $codigoCopia;
+        $temposCopia->idpeca = $pecaCopia->id;
+        $temposCopia->save();
+      }
+      return back();
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -132,7 +154,7 @@ class PecaController extends Controller
       $infoPeca->codigo = $request->codigo;
       $infoPeca->descricao = $request->descricao;
       $infoPeca->idmateriaprima = $request->materiaprima;
-      if($request->modelo == 'on')
+      if($request->modelo == 'on' && $infoPeca->modelo =="NÃO")
       {
         $infoPeca->modelo = "SIM";
         $salvarModelo = true;
@@ -140,7 +162,7 @@ class PecaController extends Controller
       }
       else
       {
-        if($infoPeca->modelo == "SIM")
+        if($request->modelo == 'off' && $infoPeca->modelo == "SIM")
         {
           $infoPeca->modelo = "NÃO";
           $salvarModelo = false;
@@ -149,13 +171,13 @@ class PecaController extends Controller
       }
       if($infoPeca->save())
       {
-        if($salvarModelo == true)
+        if(isset($salvarModelo) && $salvarModelo == true)
         {
           $modelo = new PecaModelo;
           $modelo->idpeca = $id;
           $modelo->save();
         }
-        if($excluirModelo == true)
+        if(isset($excluirModelo) && $excluirModelo == true)
         {
           $modelo = new PecaModelo;
           $modelo = $modelo->where('idpeca',$id)->delete();
