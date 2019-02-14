@@ -59,7 +59,7 @@ class RastreamentoController extends Controller
         $pecasProjeto = $infoProjeto->pecas->find($idpecaprojeto);
         if(count($pecasProjeto) > 0)
         {
-          $idtempospecas = $barcode[4];
+          $idtempospecas = $barcode[3];
           $tempos = Tempos::find($idtempospecas);
           if(count($tempos) > 0)
           {

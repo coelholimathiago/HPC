@@ -89,7 +89,7 @@ class ProjetoController extends Controller
     }
     /**
     * Composição do código de barras
-    * ID OPERACAO.ID PROJETO.CODIGO DA PEÇA.ID UNICO DA PEÇA.ID TEMPOS.ID MAQUINA.ID MATERIA PRIMA
+    * ID OPERACAO.ID PROJETO.ID UNICO DA PEÇA.ID TEMPOS.ID MAQUINA.ID MATERIA PRIMA
     *
     */
     public function gerarBarcode($id)

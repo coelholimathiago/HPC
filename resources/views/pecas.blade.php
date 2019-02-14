@@ -1,5 +1,13 @@
 @extends('layouts.tabelas')
 
+@push('css')
+  <link rel="stylesheet" href="/css/listapecas.css">
+@endpush
+
+@push('js')
+  <script src="/js/listapecas.js" charset="utf-8"></script>
+@endpush
+
 @section('titulo-elementos')
   <h4>LISTA DE PEÇAS</h4>
 @endsection
