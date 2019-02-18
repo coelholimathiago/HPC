@@ -1,0 +1,29 @@
+table .mostra-itens
+{
+  background-color: transparent;
+  color: crimson;
+  font-size: 1.2em;
+  transition: 0.3s;
+  width: 100%;
+}
+
+table .mostra-itens:hover
+{
+  color: black;
+}
+
+table .mostra-itens:focus
+{
+  outline: none;
+}
+
+table .copia
+{
+  background-image: linear-gradient(to right, white, #e6e6e6);
+}
+
+table .copia td
+{
+  border-left: transparent;
+  border-bottom: solid 1px black;
+}

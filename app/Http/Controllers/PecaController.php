@@ -22,12 +22,10 @@ class PecaController extends Controller
      */
     public function index()
     {
-      $pecas = new Pecas;
-      $listaPecas = $pecas
-                    ->join('materiaprima','pecas.idmateriaprima','=','materiaprima.id')
-                    ->select('pecas.*','materiaprima.material')->get();
-      $listaPecas = $listaPecas->sortBy('codigo');
-      return view('pecas',compact('listaPecas'));
+      $pecasModelo = PecaModelo::all();
+      $listaPecas = Pecas::all();
+      $pecasModelo = $pecasModelo->keyBy('idpeca');
+      return view('pecas',compact('listaPecas','pecasModelo'));
     }
 
     /**
@@ -46,13 +44,21 @@ class PecaController extends Controller
     public function createByModel($id)
     {
       $pecas = Pecas::find($id);
-      $idModelo = PecaModelo::where('idpeca',$id)->first()->id;
-      $ultimoCodigo = $pecas->where('idmodelo',$idModelo)->orderBy('created_at','desc')->first();
-      $ultimoCodigo = explode('-',$ultimoCodigo->codigo);
-      $codigoCopia = $pecas->codigo."-".($ultimoCodigo[1] + 1);
+      $idModelo = PecaModelo::where('idpeca',$id)->first();
+      if(count($idModelo->copias) > 0)
+      {
+        $ultimoCodigo = $pecas->where('idmodelo',$idModelo->id)->orderBy('created_at','desc')->first()->codigo;
+        $proximoCodigo = explode('-',$ultimoCodigo);
+        $proximoCodigo = explode('.',$proximoCodigo[1]);
+        $codigoCopia = $pecas->codigo."-1.".($proximoCodigo[1] + 1);
+      }
+      else
+      {
+        $codigoCopia = $pecas->codigo."-"."1.1";
+      }
       $pecaCopia = $pecas->replicate();
       $pecaCopia->codigo = $codigoCopia;
-      $pecaCopia->idmodelo = $idModelo;
+      $pecaCopia->idmodelo = $idModelo->id;
       $pecaCopia->modelo = "NÃO";
       $pecaCopia->save();
       foreach ($pecas->tempos as $tempo)

@@ -1,7 +1,7 @@
 $(document).ready(function(){
 
-  $('.dados-peca > button').click(function(){
-    $('.sub-itens').toggle();
+  $('.mostra-itens').click(function(){
+    $('.copia[value=' + $(this).val() + ']').toggle();
   });
 
 });
