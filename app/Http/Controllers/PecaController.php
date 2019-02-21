@@ -98,24 +98,6 @@ class PecaController extends Controller
       {
         dd($e);
       }
-      for ($i=0; $i < $request->qtdMaquinas ; $i++)
-      {
-        $temposPecas = new TemposPecas;
-        $temposPecas->codigo = $request->codigo;
-        $temposPecas->idpeca = $pecas->id;
-        $temposPecas->idcentrocusto = $request->maquina[$i];
-        $temposPecas->descricao = $request->operacao[$i];
-        $temposPecas->tempoestimado = $request->tempoestimado[$i];
-        try
-        {
-          $temposPecas->save();
-        }
-        catch (Exception $e)
-        {
-          dd($e);
-        }
-        unset($temposPecas);
-      }
       return redirect()->route('peca.index');
     }
 
@@ -141,10 +123,8 @@ class PecaController extends Controller
     {
       $infoPeca = Pecas::find($id);
       $material = $infoPeca->materiaPrima->material;
-      $tempos = $infoPeca->tempos;
       $listaMP = MP::all();
-      $listaCentros = CentroCusto::all();
-      return view('cadastros.peca',compact('infoPeca','tempos','material','listaMP','listaCentros'));
+      return view('cadastros.peca',compact('infoPeca','material','listaMP'));
     }
 
     /**
@@ -168,7 +148,7 @@ class PecaController extends Controller
       }
       else
       {
-        if($request->modelo == 'off' && $infoPeca->modelo == "SIM")
+        if($infoPeca->modelo == "SIM")
         {
           $infoPeca->modelo = "NÃO";
           $salvarModelo = false;
@@ -187,25 +167,6 @@ class PecaController extends Controller
         {
           $modelo = new PecaModelo;
           $modelo = $modelo->where('idpeca',$id)->delete();
-        }
-        $infoPeca->tempos()->delete();
-        for ($i=0; $i < $request->qtdMaquinas ; $i++)
-        {
-          $temposPecas = new TemposPecas;
-          $temposPecas->codigo = $request->codigo;
-          $temposPecas->idpeca = $id;
-          $temposPecas->idcentrocusto = $request->maquina[$i];
-          $temposPecas->descricao = $request->operacao[$i];
-          $temposPecas->tempoestimado = $request->tempoestimado[$i];
-          try
-          {
-            $temposPecas->save();
-          }
-          catch (Exception $e)
-          {
-            dd($e);
-          }
-          unset($temposPecas);
         }
         return redirect()->route('peca.index');
       }

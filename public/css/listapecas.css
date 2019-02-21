@@ -27,3 +27,14 @@ table .copia td
   border-left: transparent;
   border-bottom: solid 1px black;
 }
+
+table a
+{
+  color: black;
+  font-size: 1.1em;
+}
+
+table a:hover
+{
+  color: blue;
+}

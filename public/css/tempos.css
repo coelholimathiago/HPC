@@ -1,0 +1,117 @@
+:root
+{
+  --cor-button: crimson;
+  --cor-button-contraste: #a30f2d;
+}
+
+form
+{
+  margin: auto;
+  width: 75%;
+}
+
+.cabecalho-tempos
+{
+  border-bottom: solid 5px crimson;
+  display: grid;
+  grid-template-columns: auto auto;
+  padding: 0.5em;
+  text-align: center;
+  width: 100%;
+}
+
+.cabecalho-tempos h4
+{
+  font-weight: bold;
+}
+
+.cabecalho-tempos h4::before
+{
+  content: attr(label);
+  color: crimson;
+}
+
+#list
+{
+  list-style-type: none;
+  padding: 2em;
+}
+
+#list li
+{
+  display: grid;
+  grid-column-gap: 1em;
+  grid-template-columns: auto auto auto auto;
+  margin: auto;
+  padding: 0.5em;
+  width: 95%;
+}
+
+#list input
+{
+  border: solid 1px lightgrey;
+  border-radius: 0.3em;
+  box-shadow: 1px 1px 10px grey;
+  color: crimson;
+  font-size: 1.3em;
+  padding: 0.2em;
+  text-align: center;
+}
+
+#list select
+{
+  background-image: linear-gradient(to bottom right, white, lightgrey);
+  border-radius: 0.3em;
+  box-shadow: 1px 1px 10px grey;
+  color: black;
+}
+
+#list button
+{
+  border: none;
+  background-color: transparent;
+  color: crimson;
+  font-size: 1.5em;
+  transition: 0.3s;
+}
+
+#list button:hover
+{
+  outline: none;
+  transform: scale(2);
+}
+
+.item
+{
+  display: none;
+}
+
+.controles-tempos
+{
+  display: grid;
+  grid-column-gap: 1em;
+  grid-template-columns: auto auto;
+  margin: auto;
+  padding: 0.5em;
+  width: 70%;
+}
+
+.controles-tempos button
+{
+  border: none;
+  border-radius: 0.3em;
+  box-shadow: 1px 1px 10px grey;
+  background-color: crimson;
+  color: white;
+  font-size: 1.2em;
+  padding: 0.5em;
+  transition: 0.3s;
+}
+
+.controles-tempos button:hover
+{
+  background-color: var(--cor-button-contraste);
+  transform: scale(1.1);
+}
+
+#add-to-list{width: 50%;}

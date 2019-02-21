@@ -28,6 +28,7 @@
       <th>DESCRIÇÃO</th>
       <th>MATÉRIA-PRIMA</th>
       <th>DESENHO</th>
+      <th>TEMPOS</th>
       <th>AÇÕES</th>
     </thead>
     <tbody>
@@ -43,6 +44,7 @@
             <td>{{$peca->descricao}}</td>
             <td align="center">{{$peca->materiaPrima->material}}</td>
             <td align="center"><i class="far fa-file-pdf"></i></td>
+            <td align="center"><a href="{{route('tempos',$peca->id)}}"><i class="far fa-clock"></i></a></td>
             <td align="center">
               <a href="{{route('peca.edit',$peca->id)}}"><button type="button"><i class="fas fa-edit"></i></button></a>
               @if ($peca->modelo == "SIM")
@@ -58,6 +60,7 @@
               <td>{{$copia->descricao}}</td>
               <td align="center">{{$copia->materiaPrima->material}}</td>
               <td align="center"><i class="far fa-file-pdf"></i></td>
+              <td align="center"><a href="{{route('tempos',$copia->id)}}"><i class="far fa-clock"></i></a></td>
               <td align="center">
                 <a href="{{route('peca.edit',$copia->id)}}"><button type="button"><i class="fas fa-edit"></i></button></a>
                 <a href="{{route('peca.show',$copia->id)}}"><button type="button"><i class="fas fa-eye"></i></button></a>
@@ -71,6 +74,7 @@
             <td>{{$peca->descricao}}</td>
             <td align="center">{{$peca->materiaPrima->material}}</td>
             <td align="center"><i class="far fa-file-pdf"></i></td>
+            <td align="center"><a href="{{route('tempos',$peca->id)}}"><i class="far fa-clock"></i></a></td>
             <td align="center">
               <a href="{{route('peca.edit',$peca->id)}}"><button type="button"><i class="fas fa-edit"></i></button></a>
               @if ($peca->modelo == "SIM")

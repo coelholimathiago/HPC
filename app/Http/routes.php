@@ -58,6 +58,10 @@ Route::resource('peca','PecaController');
 
 Route::get('peca/copia/{id}','PecaController@createByModel')->name('copiaPeca');
 
+Route::get('peca/tempos/{id}','TemposController@index')->name('tempos');
+
+Route::post('peca/tempos/cadastrar','TemposController@cadastrar')->name('cadastrarTempos');
+
 Route::get('rastreamento','RastreamentoController@index');
 
 Route::any('rastreamento/busca','RastreamentoController@busca')->name('buscaRastreamento');
