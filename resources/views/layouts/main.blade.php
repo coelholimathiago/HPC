@@ -34,6 +34,7 @@
             <a href="{{url('/cadastro/cliente')}}">Clientes <i class="fas fa-address-book"></i></a>
             <a href="{{url('/cadastro/funcionario')}}">Funcionários <i class="fas fa-handshake"></i></a>
             <a href="{{url('/cadastro/maquina')}}">Máquinas <i class="fas fa-wrench"></i></a>
+            <a href="{{url('/cadastro/materiaprima')}}">Matéria-prima</a>
             <a href="/peca">Peças</a>
           </div>
         </div>
