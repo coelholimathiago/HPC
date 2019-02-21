@@ -41,7 +41,7 @@
               @endif
             </td>
             <td align="center">{{$peca->codigo}}</td>
-            <td>{{$peca->descricao}}</td>
+            <td name="descricao-peca">{{$peca->descricao}}</td>
             <td align="center">{{$peca->materiaPrima->material}}</td>
             <td align="center"><i class="far fa-file-pdf"></i></td>
             <td align="center"><a href="{{route('tempos',$peca->id)}}"><i class="far fa-clock"></i></a></td>
@@ -57,7 +57,7 @@
             <tr class="copia" value="{{$peca->id}}">
               <td></td>
               <td align="center">{{$copia->codigo}}</td>
-              <td>{{$copia->descricao}}</td>
+              <td name="descricao-peca">{{$copia->descricao}}</td>
               <td align="center">{{$copia->materiaPrima->material}}</td>
               <td align="center"><i class="far fa-file-pdf"></i></td>
               <td align="center"><a href="{{route('tempos',$copia->id)}}"><i class="far fa-clock"></i></a></td>
@@ -71,7 +71,7 @@
           <tr>
             <td></td>
             <td align="center">{{$peca->codigo}}</td>
-            <td>{{$peca->descricao}}</td>
+            <td name="descricao-peca">{{$peca->descricao}}</td>
             <td align="center">{{$peca->materiaPrima->material}}</td>
             <td align="center"><i class="far fa-file-pdf"></i></td>
             <td align="center"><a href="{{route('tempos',$peca->id)}}"><i class="far fa-clock"></i></a></td>

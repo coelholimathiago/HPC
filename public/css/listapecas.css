@@ -17,6 +17,11 @@ table .mostra-itens:focus
   outline: none;
 }
 
+table [name="descricao-peca"]
+{
+  max-width: 25em;
+}
+
 table .copia
 {
   background-image: linear-gradient(to right, white, #e6e6e6);
