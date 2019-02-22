@@ -10,6 +10,6 @@
     <input type="hidden" name="_method" value="DELETE">
     <label for="descricao">Nome do material:</label>
     <input class="form-control" type="text" name="descricao" value="{{$infoMP->material}}" disabled>
-    <button type="submit" name="button">Excluir Máquina</button>
+    <button type="submit" name="button">Excluir Matéria-prima</button>
   </form>
 @endsection
