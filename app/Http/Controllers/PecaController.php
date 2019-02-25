@@ -91,8 +91,11 @@ class PecaController extends Controller
       try
       {
         $pecas->save();
-        $modelo->idpeca = $pecas->id;
-        $modelo->save();
+        if($pecas->modelo == 'SIM')
+        {
+          $modelo->idpeca = $pecas->id;
+          $modelo->save();
+        }
       }
       catch (Exception $e)
       {
