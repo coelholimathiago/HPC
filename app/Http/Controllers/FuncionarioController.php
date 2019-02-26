@@ -92,7 +92,7 @@ class FuncionarioController extends Controller
       $dadosFuncionario->nome = $request->nome;
       $dadosFuncionario->cargo = $request->cargo;
       $dadosFuncionario->ativo = ($request->ativo == 'on') ? 1 : 0;
-      $dadosFuncionario->custohora = $request->custohora;
+      $dadosFuncionario->custohora = str_replace(",",".",$request->custohora);
       $dadosFuncionario->save();
       return redirect()->route('cadastro.funcionario.index');
     }
