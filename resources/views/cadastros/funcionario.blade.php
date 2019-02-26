@@ -18,7 +18,7 @@
     <input type="text" class="form-control" name="cargo" value="{{$dadosFuncionario->cargo or old('cargo')}}" required>
     <div class="titulo">Custo / hora:</div>
     <input type="text" class="form-control" name="custohora" value="{{$dadosFuncionario->custohora or old('custohora')}}" required>
-    <label class="container">Ativo
+    <label class="container">Produção
       <input type="checkbox" name="ativo" @if(isset($dadosFuncionario) && $dadosFuncionario->ativo == 1) checked @endif>
       <span class="checkmark"></span>
     </label>

@@ -15,6 +15,7 @@
 @section('lista')
   <table>
     <thead>
+      <th></th>
       <th>NOME</th>
       <th>CARGO</th>
       <th>CUSTO/HORA</th>
@@ -24,6 +25,18 @@
       @foreach ($funcionarios->sortBy('nome') as $funcionario)
         @if ($funcionario->ativo == 1)
           <tr>
+            <td align="center"><i class="fas fa-user-clock"></i></td>
+            <td align="center">{{$funcionario->nome}}</td>
+            <td align="center">{{$funcionario->cargo}}</td>
+            <td align="center">{{$funcionario->custohora}}</td>
+            <td align="center">
+              <a href="{{route('cadastro.funcionario.edit',$funcionario->id)}}"><button type="button" name="button"><i class="fas fa-edit"></i></button></a>
+              <a href="{{route('cadastro.funcionario.show',$funcionario->id)}}"><button type="button" name="button"><i class="fas fa-eye"></i></button></a>
+            </td>
+          </tr>
+        @else
+          <tr>
+            <td></td>
             <td align="center">{{$funcionario->nome}}</td>
             <td align="center">{{$funcionario->cargo}}</td>
             <td align="center">{{$funcionario->custohora}}</td>
