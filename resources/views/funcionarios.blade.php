@@ -21,7 +21,7 @@
       <th>AÇÕES</th>
     </thead>
     <tbody>
-      @foreach ($funcionarios as $funcionario)
+      @foreach ($funcionarios->sortBy('nome') as $funcionario)
         @if ($funcionario->ativo == 1)
           <tr>
             <td align="center">{{$funcionario->nome}}</td>
