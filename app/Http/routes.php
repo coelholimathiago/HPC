@@ -16,6 +16,10 @@ date_default_timezone_set("America/Sao_Paulo");
 //----------------------------------------------------------
 Route::get("/","MainController@index")->name('home');
 
+Route::get("/painel","PainelController@index")->name('painel');
+
+Route::get("/painel/truncate/{tabela}","PainelController@truncate")->name('truncate');
+
 Route::group(['prefix' => 'projetos'], function ()
 {
     Route::resource('novo','NovoProjetoController');
