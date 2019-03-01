@@ -27,7 +27,7 @@
         </tr>
         <tr>
           <td>TEMPO ESTIMADO</td>
-          <td><input type="text" name="tempoEstimado" value="{{gmdate('H:i:s',$tempoBase)}}" readonly></td>
+          <td><input type="text" name="tempoEstimado" value="{{$tempoBase->tempototalprojeto}}" readonly></td>
         </tr>
         <tr>
           <td>HORA/CUSTO INDIRETO</td>
@@ -35,7 +35,7 @@
         </tr>
         <tr>
           <td>CUSTO INDIRETO TOTAL</td>
-          <td><input type="text" name="custoIndireto" value="{{($tempoBase/3600)*104.25}}" readonly></td>
+          <td><input type="text" name="custoIndireto" value="{{($tempoBase->sectempoestimado/3600)*104.25}}" readonly></td>
         </tr>
         <tr>
           <td>MATÉRIA-PRIMA</td>

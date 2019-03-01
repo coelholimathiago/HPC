@@ -16,7 +16,7 @@ class OrcamentoController extends Controller
     $orcamento = Projetos::find($id)->orcamento;
     $pecas = Projetos::find($id)->pecas();
     $custoBase = $pecas->sum('custoestimado');
-    $tempoBase = $pecas->select(DB::raw('time_to_sec(tempoestimado) as sectempoestimado'))->get()->sum('sectempoestimado');
+    $tempoBase = $pecas->select(DB::raw('sec_to_time(sum(time_to_sec(tempoestimado))) as tempototalprojeto'),DB::raw('sum(time_to_sec(tempoestimado)) as sectempoestimado'))->first();
     if(count($orcamento) == 0)
     {
       return view('cadastros.orcamento',compact('id','custoBase','tempoBase'));
