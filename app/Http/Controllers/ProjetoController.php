@@ -21,7 +21,7 @@ class ProjetoController extends Controller
     {
       $projeto = new Projetos;
       $projeto = $projeto::find($id);
-      return $projeto;
+      return $projeto->pecas->first()->rastreamento;
       /*$pecas = new Pecas;
       $listaPecas = $pecas->all();
       $orcamento = new Orcamentos;
