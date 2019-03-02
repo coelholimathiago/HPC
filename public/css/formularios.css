@@ -3,6 +3,17 @@
   --cor-contraste: crimson;
 }
 
+.alertas .exibir
+{
+  background-color: yellow;
+  border: none;
+  border-radius: 0.3em;
+  box-shadow: 1px 1px 10px grey;
+  margin-top: 1em;
+  padding: 0.5em;
+  width: 100%;
+}
+
 .formulario
 {
   margin: auto;

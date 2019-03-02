@@ -53,12 +53,17 @@ class ClienteController extends Controller
       $this->clientes->email = $request->email;
       $this->clientes->cnpj = $request->cnpj;
       $this->clientes->inscricaoestadual = $request->inscricao;
-      try {
+      try
+      {
         $this->clientes->save();
         return redirect()->route('cadastro.cliente.index');
-      } catch (\Illuminate\Database\QueryException $e) {
+      }
+      catch (\Illuminate\Database\QueryException $e)
+      {
           dd($e);
-      } catch (\Exception $e) {
+      }
+      catch (\Exception $e)
+      {
           dd($e);
       }
     }
