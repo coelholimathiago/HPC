@@ -21,12 +21,11 @@ class ProjetoController extends Controller
     {
       $projeto = new Projetos;
       $projeto = $projeto::find($id);
-      return $projeto->pecas->first()->rastreamento;
-      /*$pecas = new Pecas;
+      $pecas = new Pecas;
       $listaPecas = $pecas->all();
       $orcamento = new Orcamentos;
       $custos = $orcamento->where('idprojeto',$id)->first();
-      return view('showProjeto',compact('projeto','listaPecas','custos','tempoGasto'));*/
+      return view('showProjeto',compact('projeto','listaPecas','custos','tempoGasto'));
     }
 
     public function adicionarPeca(Request $request)
