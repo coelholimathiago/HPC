@@ -15,10 +15,10 @@ class Clientes extends Model
     ];
 
     public $messages = [
-      'cliente.required' => 'O Campo de cliente é obrigatório!',
-      'cliente.unique' => 'Já existe um cliente cadastrado com esse nome!',
-      'email.email' => 'Insira um email válido!',
-      'cnpj.required' => 'O Campo CNPJ é obrigatório!',
-      'cnpj.unique' => 'Já existe um cliente com este CNPJ cadastrado!',
+      'cliente.required' => 'O CAMPO "NOME DO CLIENTE" É OBRIGATÓRIO!',
+      'cliente.unique' => 'JÁ EXISTE UM CLIENTE CADASTRADO COM ESSE NOME!',
+      'email.email' => 'INSIRA UM EMAIL VÁLIDO!',
+      'cnpj.required' => 'O CAMPO "CNPJ" É OBRIGATÓRIO!',
+      'cnpj.unique' => 'JÁ EXISTE UM CLIENTE COM ESTE CNPJ CADASTRADO!',
     ];
 }

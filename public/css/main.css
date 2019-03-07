@@ -1,3 +1,11 @@
+:root
+{
+  --cor-button-1: crimson;
+  --cor-button-1-contraste: #a30f2d;
+  --cor-button-2: #555;
+  --cor-button-2-contraste: black;
+}
+
 *
 {
   box-sizing: border-box;

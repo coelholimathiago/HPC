@@ -6,12 +6,12 @@
 
 @section('alertas')
   @if (isset($errors) && count($errors) > 0)
-    <div class="exibir">
-      <h4>Teste</h4>
-      @foreach ($errors->all() as $error)
-        <p>{{$error}}</p>
-      @endforeach
-    </div>
+    @foreach ($errors->all() as $error)
+      <div class="alert">
+        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+        {{$error}}
+      </div>
+    @endforeach
   @endif
 @endsection
 
